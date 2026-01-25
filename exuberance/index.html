@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exuberance | TINTWeb</title>
+  <meta name="description" content="Exuberance — Annual Sports Fest." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/historica" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    @font-face{font-family:"Blanka"; src:url("../public/fonts/blanka-free-font-er/BLANKA%20Font/Blanka-Regular.otf") format("opentype"); font-display:swap;}
+    @font-face{font-family:"Mokoto"; src:url("../public/fonts/mokoto/Mokoto%20Demo.ttf") format("truetype"); font-display:swap;}
+
+    /* Page-only ambient motion layer (keeps everything else identical) */
+    .exu-fx{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+    .exu-fx::before,.exu-fx::after{content:""; position:absolute; width:1100px; height:1100px; border-radius:50%; filter:blur(80px); opacity:.22; mix-blend-mode:screen; animation:exuDrift 16s ease-in-out infinite}
+    .exu-fx::before{left:-320px; top:12vh; background:radial-gradient(circle at 30% 30%, rgba(110,230,255,.85), rgba(183,155,255,.38) 45%, rgba(0,0,0,0) 70%)}
+    .exu-fx::after{right:-360px; bottom:8vh; background:radial-gradient(circle at 30% 30%, rgba(248,210,74,.75), rgba(151,203,255,.28) 45%, rgba(0,0,0,0) 72%); animation-duration:19s; animation-direction:reverse}
+    @keyframes exuDrift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(120px,-40px,0) scale(1.05)}100%{transform:translate3d(0,0,0) scale(1)}}
+
+    .exu-main{position:relative; z-index:1; padding-top:72px}
+    .exu-hero{min-height:70vh; display:grid; place-items:center; padding:64px 20px 34px}
+    .exu-panel{width:min(980px, 92vw); border-radius:22px; border:0; background:transparent; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; padding:28px 22px}
+    .exu-h1{margin:0; font-family:"Cinzel", serif; font-weight:700; letter-spacing:.04em; font-size:clamp(40px, 6vw, 76px); line-height:1.02}
+    .exu-sub{margin:12px 0 0; color:rgba(255,255,255,.70); font-size:clamp(15px, 1.8vw, 18px); max-width:68ch; line-height:1.6}
+    .exu-actions{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
+    .exu-grid{max-width:1100px; margin:0 auto; display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))}
+    .exu-card{border-radius:18px; border:1px solid rgba(255,255,255,.10); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:0 18px 50px rgba(0,0,0,.40); padding:16px}
+    .exu-k{letter-spacing:.14em; text-transform:uppercase; opacity:.9}
+    .exu-d{margin-top:8px; color:rgba(255,255,255,.70); line-height:1.6}
+
+    /* Hero typography (scoped) */
+    .exu-heroStack{ text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(8px, 1.3vw, 14px); padding:clamp(10px, 1.8vw, 18px) 0; }
+    .exu-heroTitle{ font-family:"Blanka", "Cinzel", serif; font-weight:400; letter-spacing:clamp(.08em, 1.1vw, .22em); font-size:clamp(54px, 9vw, 118px); line-height:.92; color:var(--tint); text-shadow:0 0 18px rgba(248,210,74,.28), 0 0 44px rgba(248,210,74,.14); opacity:0; transform:scale(.74); animation:exuZoomIn 1.15s cubic-bezier(.12,.95,.12,1) both; }
+    .exu-heroYear{ font-family:"Mokoto", "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-weight:700; letter-spacing:clamp(.10em, .9vw, .22em); font-size:clamp(40px, 6.8vw, 92px); margin-top:clamp(18px, 2.6vw, 34px); line-height:1.02; color:rgba(255,255,255,.92); text-shadow:0 0 26px rgba(255,255,255,.10); opacity:0; transform:translateY(-18px) scale(.90); animation:exuBounceIn 1.28s cubic-bezier(.12, 1.1, .2, 1) both; animation-delay:.22s; }
+    .exu-heroTag{ font-family:"Mokoto", "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-weight:600; letter-spacing:clamp(.12em, .8vw, .22em); font-size:clamp(16px, 2.6vw, 28px); line-height:1.15; color:var(--tint); text-shadow:0 0 14px rgba(248,210,74,.22), 0 0 32px rgba(248,210,74,.10); display:inline-block; max-width:92vw; clip-path:inset(0 100% 0 0); opacity:0; animation:exuTypeIn 1.05s steps(22,end) both; animation-delay:.44s; }
+    .exu-heroCollege{ font-family:"Mokoto", "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-weight:600; letter-spacing:clamp(.10em, .75vw, .18em); font-size:clamp(14px, 2.1vw, 22px); line-height:1.18; color:rgba(110,230,255,.95); text-shadow:0 0 16px rgba(110,230,255,.22), 0 0 34px rgba(110,230,255,.12); display:inline-block; max-width:92vw; clip-path:inset(0 100% 0 0); opacity:0; animation:exuTypeIn 1.25s steps(32,end) both; animation-delay:1.02s; }
+
+    @keyframes exuZoomIn{0%{opacity:0; transform:scale(.72)}55%{opacity:1; transform:scale(1.12)}78%{transform:scale(.985)}100%{opacity:1; transform:scale(1)}}
+    @keyframes exuBounceIn{0%{opacity:0; transform:translateY(-26px) scale(.88)}46%{opacity:1; transform:translateY(14px) scale(1.08)}68%{transform:translateY(-10px) scale(.995)}84%{transform:translateY(6px) scale(1.01)}100%{opacity:1; transform:translateY(0) scale(1)}}
+    @keyframes exuTypeIn{0%{opacity:0; clip-path:inset(0 100% 0 0)}1%{opacity:1}100%{opacity:1; clip-path:inset(0 0 0 0)}}
+    @media (prefers-reduced-motion: reduce){.exu-heroTitle,.exu-heroYear,.exu-heroTag,.exu-heroCollege{animation:none!important; opacity:1!important; transform:none!important; clip-path:none!important;}}
+
+    /* Exuberance topbar nav (scoped) */
+    .exu-nav{flex:1; display:flex; align-items:center; justify-content:space-evenly; gap:clamp(12px, 2.4vw, 22px); margin:0 10px;}
+    .exu-nav a{position:relative; color:rgba(255,255,255,.90); font-size:clamp(13px, 1.35vw, 16px); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; padding:8px 8px 10px; border-radius:10px;}
+    .exu-nav a::after{content:""; position:absolute; left:8px; right:8px; bottom:4px; height:2px; border-radius:999px; background:var(--tint); transform:scaleX(0); transform-origin:left; transition:transform .22s ease; box-shadow:0 0 18px rgba(248,210,74,.20)}
+    .exu-nav a:hover, .exu-nav a:focus-visible{color:var(--tint)}
+    .exu-nav a:hover::after, .exu-nav a:focus-visible::after{transform:scaleX(1)}
+
+    .exu-nav__cta{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      transform:translateZ(0);
+      will-change:transform, box-shadow;
+      border:1px solid rgba(248,210,74,.38);
+      background:linear-gradient(180deg, rgba(248,210,74,.22), rgba(248,210,74,.10));
+      box-shadow:0 16px 40px rgba(0,0,0,.45), 0 0 26px rgba(248,210,74,.10);
+      border-radius:14px;
+      padding:10px 14px 12px;
+      --ctaGlow:0;
+    }
+    .exu-nav__cta::before{content:""; position:absolute; inset:-10px; background:conic-gradient(from 180deg, rgba(248,210,74,.0), rgba(248,210,74,.55), rgba(151,203,255,.42), rgba(183,155,255,.36), rgba(248,210,74,.0)); opacity:calc(var(--ctaGlow) * .9); filter:blur(14px); transform:scale(1.05); mix-blend-mode:screen; pointer-events:none;}
+    .exu-nav__cta::after{left:12px; right:12px; bottom:6px}
+    .exu-nav__cta:hover, .exu-nav__cta:focus-visible{transform:translateY(-1px)}
+    @media (max-width: 920px){
+      .exu-nav{justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+      .exu-nav::-webkit-scrollbar{display:none}
+    }
+    /* Sports-style scroll-reactive background layer (scoped) */
+    .exu-sport{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      display:block;
+      opacity:.62;
+      mix-blend-mode:screen;
+      filter:contrast(1.05) saturate(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom cursor -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__ring"></div>
+    <div class="cursor__dot"></div>
+  </div>
+
+  <!-- Background -->
+  <div class="bg" aria-hidden="true">
+    <canvas class="exu-sport" id="exuSport" aria-hidden="true"></canvas>
+    <div class="bg__vignette"></div>
+  </div>
+
+  <!-- Extra ambient motion -->
+  <div class="exu-fx" aria-hidden="true"></div>
+
+  <!-- Navigation panel: logo left -->
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="TINT Home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 6C20.4 6 11 15.4 11 27c0 9.2 5.9 17 14.2 19.9L32 58l6.8-11.1C47.1 44 53 36.2 53 27 53 15.4 43.6 6 32 6Z" stroke="rgba(255,255,255,0.75)" stroke-width="2.6"/>
+          <path d="M22 28.5c6.5-9.2 17.6-13 28-10.4" stroke="#f8d24a" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M20 34c9.3 4.5 19.7 4.6 30 0" stroke="rgba(151,203,255,0.85)" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="32" cy="26" r="3.2" fill="#f8d24a"/>
+        </svg>
+      </span>
+      <span class="brand__text">TINT</span>
+    </a>
+
+    <nav class="exu-nav" aria-label="Exuberance navigation">
+      <a href="#schedule">Schedule</a>
+      <a href="#activities">Activities</a>
+      <a href="#sponsors">Sponsors</a>
+      <a href="#committee">Committee</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact Us</a>
+      <a class="exu-nav__cta" href="#register">Register</a>
+    </nav>
+  </header>
+
+  <main class="exu-main">
+    <section class="exu-hero">
+      <div class="exu-panel reveal">
+        <div class="exu-heroStack">
+          <div class="exu-heroTitle">EXUBERANCE</div>
+          <div class="exu-heroYear">2026</div>
+          <div class="exu-heroTag">ANNUAL SPORTS FEST</div>
+            (() => {
+              const canvas = document.getElementById('exuSport');
+              if (!canvas) return;
+              const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+              if (!ctx) return;
+
+              if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+              }
+
+              // Adjustable speed multiplier (1 = default).
+              const SPEED = 1;
+
+              function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+              function lerp(a, b, t) { return a + (b - a) * t; }
+
+              let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+              let w = 0;
+              let h = 0;
+              let raf = 0;
+
+              let spacing = 80;
+              let xLines = 30;
+              let zLines = 34;
+
+              const state = {
+                lastTime: performance.now(),
+                zOff: 0,
+              };
+
+              function rebuildGrid() {
+                // Bigger boxes + fewer lines for a prominent, lightweight single sheet.
+                spacing = clamp(Math.min(w, h) * 0.14, 56, 120);
+                xLines = clamp(Math.floor(w / spacing) + 8, 16, 34);
+                zLines = clamp(Math.floor(h / spacing) + 10, 18, 40);
+              }
+
+              function resize() {
+                const rect = canvas.getBoundingClientRect();
+                w = Math.max(1, Math.floor(rect.width));
+                h = Math.max(1, Math.floor(rect.height));
+                canvas.width = Math.floor(w * dpr);
+                canvas.height = Math.floor(h * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                rebuildGrid();
+              }
+
+              function project(x, z, vanX, vanY, yBottom) {
+                const k = 520;
+                const f = k / (z + k);
+                // Far (f→0) -> horizon; Near (f→1) -> bottom.
+                const y = lerp(vanY, yBottom, f);
+                const xProj = lerp(vanX, x, f);
+                return { x: xProj, y, f };
+              }
+
+              function draw() {
+                const now = performance.now();
+                const dt = clamp((now - state.lastTime) / 1000, 0.001, 0.05);
+                state.lastTime = now;
+
+                // Infinite scroll toward viewer.
+                const worldSpeed = 220 * SPEED;
+                state.zOff = (state.zOff + worldSpeed * dt) % spacing;
+
+                // Black background.
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.globalAlpha = 1;
+                ctx.fillStyle = 'rgba(0,0,0,1)';
+                ctx.fillRect(0, 0, w, h);
+
+                // Cyan grid.
+                const cx = w * 0.5;
+                const vanY = h * 0.42;
+                const yBottom = h + 2;
+                const vanX = cx;
+
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.strokeStyle = 'rgba(0,220,255,0.44)';
+                ctx.shadowColor = 'rgba(0,220,255,0.70)';
+                ctx.shadowBlur = 14;
+
+                const xPad = w * 0.08;
+                const xMin = -xPad;
+                const xMax = w + xPad;
+
+                // Horizontal lines.
+                for (let i = 0; i < zLines; i++) {
+                  const z = (i + 1) * spacing - state.zOff;
+                  const zz = z <= 1 ? 1 : z;
+                  const left = project(xMin, zz, vanX, vanY, yBottom);
+                  const right = project(xMax, zz, vanX, vanY, yBottom);
+
+                  const near = left.f;
+                  ctx.globalAlpha = 0.18 + near * 0.62;
+                  ctx.lineWidth = 1.2 + near * 2.6;
+                  ctx.beginPath();
+                  ctx.moveTo(left.x, left.y);
+                  ctx.lineTo(right.x, right.y);
+                  ctx.stroke();
+                }
+
+                // Vertical lines.
+                ctx.globalAlpha = 0.75;
+                ctx.lineWidth = 1.2;
+                for (let j = 0; j < xLines; j++) {
+                  const u = xLines <= 1 ? 0.5 : j / (xLines - 1);
+                  const xb = lerp(xMin, xMax, u);
+                  ctx.beginPath();
+                  ctx.moveTo(xb, yBottom);
+                  ctx.lineTo(vanX, vanY);
+                  ctx.stroke();
+                }
+
+                ctx.globalAlpha = 1;
+                raf = requestAnimationFrame(draw);
+              }
+
+              const ro = new ResizeObserver(() => resize());
+              ro.observe(canvas);
+
+              function onResize() {
+                dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+                resize();
+              }
+
+              window.addEventListener('resize', onResize, { passive: true });
+
+              resize();
+              raf = requestAnimationFrame(draw);
+
+              function onVis() {
+                if (document.hidden) cancelAnimationFrame(raf);
+                else raf = requestAnimationFrame(draw);
+              }
+              document.addEventListener('visibilitychange', onVis);
+            })();
+            const rect = canvas.getBoundingClientRect();
+            w = Math.max(1, Math.floor(rect.width));
+            h = Math.max(1, Math.floor(rect.height));
+            canvas.width = Math.floor(w * dpr);
+            canvas.height = Math.floor(h * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            rebuildGrid();
+          }
+
+          function rebuildGrid() {
+            // Bigger grid boxes.
+            spacing = clamp(clamp(Math.min(w, h) * 0.085, 30, 64) * 1.55, 40, 92);
+            xLines = clamp(Math.floor(w / spacing) + 16, 20, 46);
+            zLines = clamp(Math.floor(h / spacing) + 12, 18, 42);
+            ctx.clearRect(0, 0, w, h);
+          }
+
+          function projectPoint(x, y, z, yaw, pitch, cx, cy, fov) {
+            const cyaw = Math.cos(yaw);
+            const syaw = Math.sin(yaw);
+            const cp = Math.cos(pitch);
+            const sp = Math.sin(pitch);
+            const x1 = x * cyaw - z * syaw;
+            const z1 = x * syaw + z * cyaw;
+            const y2 = y * cp - z1 * sp;
+            const z2 = y * sp + z1 * cp;
+            if (z2 < 10) return null;
+            const s = fov / (fov + z2);
+            return { x: cx + x1 * s, y: cy - y2 * s, s, z: z2 };
+          }
+
+          function draw() {
+            const now = performance.now();
+            const dt = clamp((now - state.lastTime) / 1000, 0.001, 0.05);
+            state.lastTime = now;
+            state.t += dt;
+            state.scrollT += (state.scrollY - state.scrollT) * 0.085;
+            state.scrollV = lerp(state.scrollV, state.scrollY - state.prevScrollY, 0.2);
+            state.prevScrollY = state.scrollY;
+
+            const intensity = clamp(Math.abs(state.scrollV) / 60, 0, 2.2);
+
+            const dPX = state.pointerX - state.lastPX;
+            const dPY = state.pointerY - state.lastPY;
+            state.lastPX = state.pointerX;
+            state.lastPY = state.pointerY;
+            const pSpeed = clamp(Math.hypot(dPX, dPY) * 20, 0, 2.8);
+
+            const dirX = (state.pointerX - 0.5) * 2;
+            const dirY = (state.pointerY - 0.5) * 2;
+
+            state.yaw = lerp(state.yaw, dirX * 0.16, 0.05);
+            state.pitch = lerp(state.pitch, -0.96 + dirY * 0.10, 0.05);
+            state.steer = lerp(state.steer, dirX, 0.035);
+
+            // Strong constant forward motion (road feel).
+            // Slower overall motion.
+            const baseSpeed = 280 + intensity * 90 + pSpeed * 60;
+            state.zOff += baseSpeed * dt;
+            state.xOff += dirX * (55 + intensity * 45) * dt;
+
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-out';
+            const fade = 0.24 - intensity * 0.035 - pSpeed * 0.03;
+            ctx.fillStyle = `rgba(0,0,0,${clamp(fade, 0.10, 0.22)})`;
+            ctx.fillRect(0, 0, w, h);
+            ctx.restore();
+
+            const cx = w * 0.5;
+            const vanY = h * 0.44;
+            const vanX = cx + state.steer * w * 0.06;
+
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+
+            // Cyan gridline floor only.
+            const baseA = 0.14 + intensity * 0.03 + pSpeed * 0.02;
+            const glowA = 0.45;
+
+            ctx.save();
+            ctx.strokeStyle = `rgba(0,220,255,${clamp(baseA, 0.12, 0.26)})`;
+            ctx.shadowColor = `rgba(0,220,255,${glowA})`;
+            ctx.shadowBlur = 10;
+
+            // Single grid sheet: horizontal "road" lines moving forward.
+            const roadSpacing = spacing * 1.08;
+            const phase = (state.zOff / roadSpacing) % 1;
+            const yBottom = h + 4;
+
+            for (let i = 0; i < zLines; i++) {
+              const q = (i / zLines + phase) % 1;
+              const depth = Math.pow(q, 2.15);
+              const y = lerp(vanY, yBottom, depth);
+              const wHalf = lerp(w * 0.06, w * 0.84, Math.pow(q, 0.9));
+              const near = Math.pow(q, 1.25);
+
+              ctx.globalAlpha = (0.18 + near * 0.92) * (0.78 + intensity * 0.05 + pSpeed * 0.04);
+              ctx.lineWidth = 0.85 + near * 2.2;
+              ctx.beginPath();
+              ctx.moveTo(vanX - wHalf, y);
+              ctx.lineTo(vanX + wHalf, y);
+              ctx.stroke();
+            }
+
+            // Vertical columns converging to the vanishing point.
+            ctx.globalAlpha = 0.55;
+            ctx.lineWidth = 1;
+            const xPad = w * 0.06;
+            for (let j = 0; j < xLines; j++) {
+              const u = xLines <= 1 ? 0.5 : j / (xLines - 1);
+              const xb = lerp(-xPad, w + xPad, u);
+              ctx.beginPath();
+              ctx.moveTo(xb, yBottom);
+              ctx.lineTo(vanX, vanY);
+              ctx.stroke();
+            }
+
+            ctx.restore();
+
+            ctx.restore();
+
+            ctx.globalAlpha = 1;
+            raf = requestAnimationFrame(draw);
+          }
+
+          function onScroll() {
+            state.scrollY = window.scrollY || 0;
+          }
+
+          function onPointerMove(e) {
+            state.pointerX = clamp(e.clientX / Math.max(1, window.innerWidth), 0, 1);
+            state.pointerY = clamp(e.clientY / Math.max(1, window.innerHeight), 0, 1);
+          }
+
+          const ro = new ResizeObserver(() => resize());
+          ro.observe(canvas);
+
+          function onResize() {
+            dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+            resize();
+          }
+
+          window.addEventListener('resize', onResize, { passive: true });
+          window.addEventListener('scroll', onScroll, { passive: true });
+          window.addEventListener('pointermove', onPointerMove, { passive: true });
+          window.addEventListener('mousemove', onPointerMove, { passive: true });
+
+          resize();
+          onScroll();
+          raf = requestAnimationFrame(draw);
+
+          function onVis() {
+            if (document.hidden) cancelAnimationFrame(raf);
+            else raf = requestAnimationFrame(draw);
+          }
+          document.addEventListener('visibilitychange', onVis);
+        })();
+      </script>
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TINT icon">
+  <defs>
+    <linearGradient id="g" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#97cbff" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="#f8d24a" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#38a6d4" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#100e17"/>
+  <path d="M32 8C22 8 14 16 14 26c0 8 5.1 14.8 12.2 17.3L32 54l5.8-10.7C44.9 40.8 50 34 50 26 50 16 42 8 32 8Z" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2.6"/>
+  <path d="M22 27.5c6.5-9.2 17.6-13 28-10.4" fill="none" stroke="#f8d24a" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M20 33c9.3 4.5 19.7 4.6 30 0" fill="none" stroke="rgba(151,203,255,0.85)" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="32" cy="25" r="3.2" fill="url(#g)"/>
+</svg>
