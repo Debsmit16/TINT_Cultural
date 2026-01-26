@@ -67,7 +67,7 @@ export default function Page() {
 
         <section id="fests" className="section">
           <div className="section__head reveal">
-            <h2 className="h2">Let's Celebrate!</h2>
+            <h2 className="h2">Let&apos;s Celebrate!</h2>
             <p className="muted">Three signature experiences — each with its own rhythm.</p>
           </div>
 

@@ -257,6 +257,7 @@
 /* Sportsmanship section + past-years carousels (scoped to Exuberance page) */
 .Exuberance_sportsmanship__zYVty{
   position:relative;
+  margin-top:clamp(34px, 5vw, 72px);
   padding-top:50px;
 }
 

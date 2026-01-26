@@ -1,0 +1,83 @@
+
+.pageSection {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.heading {
+  font-family: "Wheaton-Capitals", "Cinzel", serif;
+  color: rgba(248, 210, 74, 1);
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 26px rgba(248, 210, 74, 0.18);
+  margin: 10px 0 26px;
+  font-size: clamp(28px, 4.2vw, 52px);
+}
+
+.subHeading {
+  font-family: "Wheaton-Capitals", "Cinzel", serif;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 26px 0 12px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.rules {
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.rules ol {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.rules li {
+  margin: 10px 0;
+}
+
+.heads {
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.headCard {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.headName {
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.headExtra {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.emptySpace {
+  height: 80px;
+}
+
+@media (max-width: 640px) {
+  .subHeading {
+    text-align: left;
+  }
+}

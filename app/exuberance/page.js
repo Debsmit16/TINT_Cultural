@@ -5,6 +5,7 @@ import SportBg from './SportBg.jsx';
 import PastYearsCarousels from './PastYearsCarousels.jsx';
 import ExuberanceGallery from './ExuberanceGallery.jsx';
 import { EXUBERANCE_GALLERY_FILES, EXUBERANCE_GALLERY_INITIAL_COUNT } from './galleryFiles.js';
+import { slugFromEventTitle } from './activities/eventDetails.js';
 
 export const metadata = {
   title: 'Exuberance | TINTWeb',
@@ -118,9 +119,9 @@ export default function ExuberancePage() {
           <a href="#schedule">Schedule</a>
           <a href="#awaits">Activities</a>
           <a href="#sponsors">Sponsors</a>
-          <a href="#committee">Committee</a>
+          <Link href="/exuberance/committee">Committee</Link>
           <Link href="/exuberance/gallery">Gallery</Link>
-          <a href="#contact">Contact Us</a>
+          <Link href="/exuberance/contact">Contact Us</Link>
           <a className={styles.cta} href="#register">
             Register
           </a>
@@ -171,9 +172,13 @@ export default function ExuberancePage() {
                     </div>
                     <div className={styles.awaitCardFooter}>
                       <div className={styles.awaitCardTitle}>{item.title}</div>
-                      <a className={styles.awaitExplore} href="#register" aria-label={`Explore more about ${item.title}`}>
+                      <Link
+                        className={styles.awaitExplore}
+                        href={`/exuberance/activities/${slugFromEventTitle(item.title)}`}
+                        aria-label={`Explore more about ${item.title}`}
+                      >
                         Explore More
-                      </a>
+                      </Link>
                     </div>
                   </article>
                 ))}
@@ -196,9 +201,13 @@ export default function ExuberancePage() {
                     </div>
                     <div className={styles.awaitCardFooter}>
                       <div className={styles.awaitCardTitle}>{item.title}</div>
-                      <a className={styles.awaitExplore} href="#register" aria-label={`Explore more about ${item.title}`}>
+                      <Link
+                        className={styles.awaitExplore}
+                        href={`/exuberance/activities/${slugFromEventTitle(item.title)}`}
+                        aria-label={`Explore more about ${item.title}`}
+                      >
                         Explore More
-                      </a>
+                      </Link>
                     </div>
                   </article>
                 ))}
@@ -221,9 +230,13 @@ export default function ExuberancePage() {
                     </div>
                     <div className={styles.awaitCardFooter}>
                       <div className={styles.awaitCardTitle}>{item.title}</div>
-                      <a className={styles.awaitExplore} href="#register" aria-label={`Explore more about ${item.title}`}>
+                      <Link
+                        className={styles.awaitExplore}
+                        href={`/exuberance/activities/${slugFromEventTitle(item.title)}`}
+                        aria-label={`Explore more about ${item.title}`}
+                      >
                         Explore More
-                      </a>
+                      </Link>
                     </div>
                   </article>
                 ))}

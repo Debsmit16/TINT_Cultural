@@ -18,11 +18,17 @@
       "static/css/app/exuberance/page.css",
       "static/chunks/app/exuberance/page.js"
     ],
-    "/exuberance/gallery/page": [
+    "/exuberance/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/exuberance/gallery/page.css",
-      "static/chunks/app/exuberance/gallery/page.js"
+      "static/css/app/exuberance/contact/page.css",
+      "static/chunks/app/exuberance/contact/page.js"
+    ],
+    "/exuberance/committee/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/exuberance/committee/page.css",
+      "static/chunks/app/exuberance/committee/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
