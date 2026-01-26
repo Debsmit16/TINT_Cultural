@@ -73,6 +73,14 @@
   transform:scaleX(1);
 }
 
+.nav a.navActive{
+  color:var(--tint);
+}
+
+.nav a.navActive::after{
+  transform:scaleX(1);
+}
+
 .cta{
   border:1px solid rgba(248,210,74,.38);
   background:linear-gradient(180deg, rgba(248,210,74,.22), rgba(248,210,74,.10));

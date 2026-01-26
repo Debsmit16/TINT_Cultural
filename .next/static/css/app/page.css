@@ -1,0 +1,132 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/components/FestCards.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.FestCards_wrap__QoOs4{
+  position:relative;
+  height:420px;
+}
+
+/* Container: centered with absolute positioning */
+.FestCards_container__ci144{
+  position:absolute;
+  top:60px;
+  left:calc(50% - 360px);
+  width:720px;
+  height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+}
+
+.FestCards_card__35ng8{
+  position:relative;
+  width:300px;
+  height:340px;
+  padding:16px 16px 14px;
+  border-radius:10px;
+  background:#17141d;
+  box-shadow:-1rem 0 3rem #000;
+  display:flex;
+  flex-direction:column;
+  transition: transform 0.4s ease-out;
+}
+
+.FestCards_card__35ng8:not(:first-child){
+  margin-left:-50px;
+}
+
+.FestCards_card__35ng8:hover{
+  transform: translateY(-20px);
+}
+
+/* Following cards shift right when a card is hovered */
+.FestCards_card__35ng8:hover ~ .FestCards_card__35ng8{
+  transform: translateX(50px);
+}
+
+.FestCards_head__XjWF_{display:flex; flex-direction:column; gap:4px;}
+
+.FestCards_title__Y2V7_{
+  margin:0;
+  font-family: inherit;
+  font-weight:300;
+  color:#fff;
+  font-size:20px;
+  line-height:1.2;
+}
+
+.FestCards_sub__UdqPZ{
+  color:rgba(255,255,255,.80);
+  font-size:12px;
+  letter-spacing:.02em;
+}
+
+.FestCards_media__qeRVD{margin-top:12px;}
+
+.FestCards_img__3q_za{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.FestCards_desc__vtis3{
+  margin:10px 0 0;
+  color:#fff;
+  font-size:12px;
+  line-height:1.45;
+  opacity:.90;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.FestCards_actions__WV8aw{margin-top:auto;}
+
+.FestCards_btn__ZZPM8{
+  margin-top:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 16px;
+  background-color:#38a6d4;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:clamp(13px, 1.25vw, 15px);
+  width:100%;
+  transform:scaleX(.62);
+  transform-origin:center;
+  transition: transform .22s ease, background-color 0.4s ease-out;
+}
+
+.FestCards_card__35ng8:hover .FestCards_btn__ZZPM8,
+.FestCards_card__35ng8:focus-within .FestCards_btn__ZZPM8{
+  transform:scaleX(1);
+}
+
+.FestCards_btn__ZZPM8:hover{background-color:#2a8ab8;}
+
+@media (max-width: 700px){
+  .FestCards_wrap__QoOs4{height:420px;}
+  .FestCards_container__ci144{
+    width:92vw;
+    left:50%;
+    transform:translateX(-50%);
+  }
+}
+
+@media (max-width: 520px){
+  .FestCards_wrap__QoOs4{height:470px;}
+  .FestCards_container__ci144{
+    height:auto;
+    padding:20px 0;
+    align-items:flex-start;
+  }
+  .FestCards_card__35ng8{width:260px; height:295px;}
+  .FestCards_card__35ng8:not(:first-child){margin-left:-46px;}
+}
+

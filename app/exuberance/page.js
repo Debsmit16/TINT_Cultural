@@ -3,6 +3,8 @@ import ClientEffects from '../components/ClientEffects.jsx';
 import styles from './Exuberance.module.css';
 import SportBg from './SportBg.jsx';
 import PastYearsCarousels from './PastYearsCarousels.jsx';
+import ExuberanceGallery from './ExuberanceGallery.jsx';
+import { EXUBERANCE_GALLERY_FILES, EXUBERANCE_GALLERY_INITIAL_COUNT } from './galleryFiles.js';
 
 export const metadata = {
   title: 'Exuberance | TINTWeb',
@@ -63,32 +65,6 @@ export default function ExuberancePage() {
     ],
   };
 
-  const moments = [
-    {
-      src: 'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Crowd energy and celebration',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Football action moment',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Game highlight under lights',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Team huddle and spirit',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Track sprint and motion blur',
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Relay exchange',
-    },
-  ];
 
   return (
     <div className={styles.wrap}>
@@ -140,10 +116,10 @@ export default function ExuberancePage() {
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
           <a href="#schedule">Schedule</a>
-          <a href="#activities">Activities</a>
+          <a href="#awaits">Activities</a>
           <a href="#sponsors">Sponsors</a>
           <a href="#committee">Committee</a>
-          <a href="#gallery">Gallery</a>
+          <Link href="/exuberance/gallery">Gallery</Link>
           <a href="#contact">Contact Us</a>
           <a className={styles.cta} href="#register">
             Register
@@ -263,22 +239,7 @@ export default function ExuberancePage() {
             </h2>
           </div>
 
-          <div className={styles.momentsGrid} aria-label="Exuberance gallery">
-            {moments.map((img) => (
-              <figure key={img.src} className={styles.momentsItem}>
-                <img className={styles.momentsImg} src={img.src} alt={img.alt} loading="lazy" />
-              </figure>
-            ))}
-          </div>
-
-          <div className={styles.momentsFoot}>
-            <a className={styles.momentsCta} href="#register" aria-label="View full gallery">
-              View full gallery
-              <span className={styles.momentsCtaIcon} aria-hidden="true">
-                →
-              </span>
-            </a>
-          </div>
+          <ExuberanceGallery files={EXUBERANCE_GALLERY_FILES} initialCount={EXUBERANCE_GALLERY_INITIAL_COUNT} />
         </section>
 
         <section id="register" className={`section ${styles.join}`}>
