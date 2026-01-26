@@ -50,9 +50,9 @@ export default function FestCards() {
                   Explore
                 </Link>
               ) : (
-                <button className={styles.btn} type="button">
-                  Explore
-                </button>
+                <Link className={styles.btn} href={`/${fest.title.toLowerCase()}`} aria-label={`Explore ${fest.title}`}>
+                  Coming Soon
+                </Link>
               )}
             </div>
           </article>

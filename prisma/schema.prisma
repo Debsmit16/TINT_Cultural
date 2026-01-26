@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==================== AUTH MODELS (NextAuth.js) ====================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?   // For credentials auth
+  image         String?
+  role          Role      @default(USER)
+  
+  // Profile fields
+  phone         String?
+  college       String?
+  department    String?
+  year          String?
+  rollNumber    String?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  registrations Registration[]
+  teamMemberships TeamMember[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ==================== SPORTS & EVENT MODELS ====================
+
+model Sport {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  category    SportCategory
+  description String?  @db.Text
+  rules       String?  @db.Text
+  image       String?
+  maxTeamSize Int      @default(1)
+  minTeamSize Int      @default(1)
+  isActive    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  registrations Registration[]
+}
+
+model Registration {
+  id          String   @id @default(cuid())
+  userId      String
+  sportId     String
+  teamName    String?
+  status      RegistrationStatus @default(PENDING)
+  
+  // Payment info
+  paymentStatus PaymentStatus @default(PENDING)
+  transactionId String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sport       Sport    @relation(fields: [sportId], references: [id], onDelete: Cascade)
+  teamMembers TeamMember[]
+  
+  @@unique([userId, sportId])
+}
+
+model TeamMember {
+  id             String   @id @default(cuid())
+  registrationId String
+  userId         String?  // Optional: can be non-registered user
+  name           String
+  email          String?
+  phone          String?
+  college        String?
+  
+  createdAt      DateTime @default(now())
+  
+  registration   Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  user           User?        @relation(fields: [userId], references: [id])
+}
+
+// ==================== ENUMS ====================
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum SportCategory {
+  ATHLETICS
+  OUTDOOR
+  INDOOR
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
