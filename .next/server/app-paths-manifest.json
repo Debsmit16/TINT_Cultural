@@ -1,3 +1,9 @@
 {
-  "/exuberance/page": "app/exuberance/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/exuberance/activities/[slug]/page": "app/exuberance/activities/[slug]/page.js",
+  "/exuberance/committee/page": "app/exuberance/committee/page.js",
+  "/exuberance/gallery/page": "app/exuberance/gallery/page.js",
+  "/exuberance/page": "app/exuberance/page.js",
+  "/exuberance/contact/page": "app/exuberance/contact/page.js"
 }

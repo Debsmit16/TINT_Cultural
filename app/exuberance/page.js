@@ -35,6 +35,10 @@ export default function ExuberancePage() {
         title: 'Hit the Wicket',
         img: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1600&q=80',
       },
+      {
+        title: 'Tug of war',
+        img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80',
+      },
     ],
     outdoor: [
       {
