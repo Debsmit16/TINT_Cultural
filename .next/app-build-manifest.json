@@ -1,39 +1,16 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/page.css",
-      "static/chunks/app/page.js"
-    ],
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
-    ],
     "/exuberance/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/exuberance/page.css",
       "static/chunks/app/exuberance/page.js"
     ],
-    "/exuberance/contact/page": [
+    "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/exuberance/contact/page.css",
-      "static/chunks/app/exuberance/contact/page.js"
-    ],
-    "/exuberance/committee/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/exuberance/committee/page.css",
-      "static/chunks/app/exuberance/committee/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ]
   }
 }

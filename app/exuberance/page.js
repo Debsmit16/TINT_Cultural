@@ -345,6 +345,16 @@ export default function ExuberancePage() {
             <a className={styles.joinCta} href="#register" aria-label="Register now">
               Register Now
             </a>
+
+            <a
+              className={styles.joinBrochure}
+              href="https://drive.google.com/file/d/1Ngm8P3nsiJDw_3iuB5nx81Jb_g-drtZL/view?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Download brochure"
+            >
+              Download Brochure
+            </a>
           </div>
         </section>
 
