@@ -1,17 +1,18 @@
 import Link from 'next/link';
 import ClientEffects from '../../components/ClientEffects.jsx';
 import styles from '../Exuberance.module.css';
-import localStyles from './Contact.module.css';
-import ContactTeams from './ContactTeams.jsx';
+import SportBg from '../SportBg.jsx';
+import localStyles from './Schedule.module.css';
+import ScheduleTabs from './ScheduleTabs.jsx';
 
 export const metadata = {
-  title: 'Contact Us | Exuberance | TINTWeb',
-  description: 'Contact teams — Exuberance.',
+  title: 'Schedule | Exuberance | TINTWeb',
+  description: 'Schedule — Exuberance.',
 };
 
-export default function ContactUsPage() {
+export default function SchedulePage() {
   return (
-    <div className={localStyles.wrap}>
+    <div className={styles.wrap}>
       <ClientEffects />
 
       <div className="cursor" aria-hidden="true">
@@ -19,7 +20,21 @@ export default function ContactUsPage() {
         <div className="cursor__dot"></div>
       </div>
 
-      <div className={localStyles.bg} aria-hidden="true" />
+      <div
+        className="bg"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.28)), url("/background/schedule_bg.avif")',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        aria-hidden="true"
+      >
+        <SportBg className={styles.sport} />
+        <div className="bg__vignette"></div>
+      </div>
+
+      <div className={styles.fx} aria-hidden="true" />
 
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">
@@ -30,18 +45,8 @@ export default function ContactUsPage() {
                 stroke="rgba(255,255,255,0.75)"
                 strokeWidth="2.6"
               />
-              <path
-                d="M22 28.5c6.5-9.2 17.6-13 28-10.4"
-                stroke="#f8d24a"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-              />
-              <path
-                d="M20 34c9.3 4.5 19.7 4.6 30 0"
-                stroke="rgba(151,203,255,0.85)"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-              />
+              <path d="M22 28.5c6.5-9.2 17.6-13 28-10.4" stroke="#f8d24a" strokeWidth="2.6" strokeLinecap="round" />
+              <path d="M20 34c9.3 4.5 19.7 4.6 30 0" stroke="rgba(151,203,255,0.85)" strokeWidth="2.6" strokeLinecap="round" />
               <circle cx="32" cy="26" r="3.2" fill="#f8d24a" />
             </svg>
           </span>
@@ -49,14 +54,14 @@ export default function ContactUsPage() {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
-          <Link href="/exuberance/schedule">Schedule</Link>
+          <Link className={styles.navActive} href="/exuberance/schedule" aria-current="page">
+            Schedule
+          </Link>
           <Link href="/exuberance#awaits">Activities</Link>
           <Link href="/exuberance/sponsors">Sponsors</Link>
           <Link href="/exuberance/committee">Committee</Link>
           <Link href="/exuberance/gallery">Gallery</Link>
-          <Link className={styles.navActive} href="/exuberance/contact" aria-current="page">
-            Contact Us
-          </Link>
+          <Link href="/exuberance/contact">Contact Us</Link>
           <Link className={styles.cta} href="/exuberance#register">
             Register
           </Link>
@@ -70,10 +75,15 @@ export default function ContactUsPage() {
         </Link>
       </header>
 
-      <main className={localStyles.main}>
-        <div className={localStyles.container}>
-          <ContactTeams />
-        </div>
+      <main className={styles.main}>
+        <section className={`section ${localStyles.section}`} aria-label="Schedule">
+          <div className={localStyles.head}>
+            <h1 className={localStyles.title}>
+              <span className={localStyles.titleGlow}>SCHEDULE</span>
+            </h1>
+            <ScheduleTabs />
+          </div>
+        </section>
       </main>
     </div>
   );

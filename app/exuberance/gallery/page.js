@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import ClientEffects from '../../components/ClientEffects.jsx';
 import styles from '../Exuberance.module.css';
-import SportBg from '../SportBg.jsx';
 import FullGallery from './FullGallery.jsx';
 import fullStyles from './FullGallery.module.css';
 import { EXUBERANCE_GALLERY_FILES, EXUBERANCE_GALLERY_INITIAL_COUNT } from '../galleryFiles.js';
@@ -21,12 +20,18 @@ export default function ExuberanceGalleryPage() {
         <div className="cursor__dot"></div>
       </div>
 
-      <div className="bg" aria-hidden="true">
-        <SportBg className={styles.sport} />
+      <div
+        className="bg"
+        style={{
+          backgroundImage: 'url("/background/gallery_bg.avif")',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        aria-hidden="true"
+      >
         <div className="bg__vignette"></div>
       </div>
-
-      <div className={styles.fx} aria-hidden="true" />
 
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">
@@ -56,9 +61,9 @@ export default function ExuberanceGalleryPage() {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
-          <Link href="/exuberance#schedule">Schedule</Link>
+          <Link href="/exuberance/schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
-          <Link href="/exuberance#sponsors">Sponsors</Link>
+          <Link href="/exuberance/sponsors">Sponsors</Link>
           <Link href="/exuberance/committee">Committee</Link>
           <Link className={styles.navActive} href="/exuberance/gallery" aria-current="page">
             Gallery
