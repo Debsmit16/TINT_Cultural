@@ -392,6 +392,7 @@ export default function OutdoorRegistration() {
                   </div>
                 )}
 
+                {/* ID Card upload temporarily disabled
                 <div className={styles.fieldGroup}>
                   <label className={styles.label}>
                     All Players ID Proof (Image) *
@@ -407,7 +408,9 @@ export default function OutdoorRegistration() {
                   {uploadingId && <span className={styles.uploadStatus}>Uploading...</span>}
                   {idProofUrl && <span className={styles.uploadSuccess}>✓ Uploaded</span>}
                 </div>
+                */}
 
+                {/* Team list upload temporarily disabled
                 <div className={styles.fieldGroup}>
                   <label className={styles.label}>
                     Team List (Image) *
@@ -423,6 +426,7 @@ export default function OutdoorRegistration() {
                   {uploadingTeam && <span className={styles.uploadStatus}>Uploading...</span>}
                   {teamListUrl && <span className={styles.uploadSuccess}>✓ Uploaded</span>}
                 </div>
+                */}
               </div>
             )}
 

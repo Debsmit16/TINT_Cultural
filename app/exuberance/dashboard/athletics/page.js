@@ -437,7 +437,7 @@ export default function AthleticsRegistration() {
               </div>
             </div>
 
-            {/* ID Proof Upload */}
+            {/* ID Proof Upload - Temporarily Disabled
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>ID Proof Upload</h3>
               
@@ -457,6 +457,7 @@ export default function AthleticsRegistration() {
                 {idProofUrl && <span className={styles.uploadSuccess}>✓ Uploaded</span>}
               </div>
             </div>
+            */}
 
             {/* Relay Team Details (conditional) */}
             {hasRelay && (
