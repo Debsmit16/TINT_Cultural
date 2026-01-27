@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../Auth.module.css';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/exuberance';
@@ -49,6 +49,84 @@ export default function LoginPage() {
   };
 
   return (
+    <main className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>Welcome Back</h1>
+            <p className={styles.subtitle}>Sign in to your Exuberance account</p>
+          </div>
+
+          <form className={styles.form} onSubmit={handleSubmit}>
+            {error && <div className={styles.error}>{error}</div>}
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="email">Email</label>
+              <input
+                className={styles.input}
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="password">Password</label>
+              <input
+                className={styles.input}
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button
+              className={styles.submitBtn}
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+
+          <div className={styles.footer}>
+            <p className={styles.footerText}>
+              Don&apos;t have an account?
+              <Link className={styles.footerLink} href="/auth/register">
+                Register
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function LoginFallback() {
+  return (
+    <main className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>Loading...</h1>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
     <div className={styles.wrap}>
       <div className={styles.bg} aria-hidden="true" />
       
@@ -80,65 +158,9 @@ export default function LoginPage() {
         </Link>
       </header>
 
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <div className={styles.card}>
-            <div className={styles.header}>
-              <h1 className={styles.title}>Welcome Back</h1>
-              <p className={styles.subtitle}>Sign in to your Exuberance account</p>
-            </div>
-
-            <form className={styles.form} onSubmit={handleSubmit}>
-              {error && <div className={styles.error}>{error}</div>}
-
-              <div className={styles.fieldGroup}>
-                <label className={styles.label} htmlFor="email">Email</label>
-                <input
-                  className={styles.input}
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="your@email.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className={styles.fieldGroup}>
-                <label className={styles.label} htmlFor="password">Password</label>
-                <input
-                  className={styles.input}
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <button
-                className={styles.submitBtn}
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? 'Signing in...' : 'Sign In'}
-              </button>
-            </form>
-
-            <div className={styles.footer}>
-              <p className={styles.footerText}>
-                Don&apos;t have an account?
-                <Link className={styles.footerLink} href="/auth/register">
-                  Register
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </main>
+      <Suspense fallback={<LoginFallback />}>
+        <LoginForm />
+      </Suspense>
     </div>
   );
 }
