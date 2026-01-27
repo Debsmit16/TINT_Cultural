@@ -4,6 +4,7 @@ import styles from './Exuberance.module.css';
 import SportBg from './SportBg.jsx';
 import PastYearsCarousels from './PastYearsCarousels.jsx';
 import ExuberanceGallery from './ExuberanceGallery.jsx';
+import RegisterForm from './RegisterForm.jsx';
 import { EXUBERANCE_GALLERY_FILES, EXUBERANCE_GALLERY_INITIAL_COUNT } from './galleryFiles.js';
 import { slugFromEventTitle } from './activities/eventDetails.js';
 
@@ -265,6 +266,10 @@ export default function ExuberancePage() {
               Join <span className={styles.joinCount}>600+</span> Students
             </h2>
             <p className={styles.joinSub}>Be a part of Exuberance</p>
+          </div>
+
+          <div className={styles.registerFormWrap}>
+            <RegisterForm />
           </div>
 
           <div className={styles.joinGrid} aria-label="Event details">
