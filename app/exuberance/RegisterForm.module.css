@@ -16,7 +16,7 @@
     0 24px 80px rgba(0, 0, 0, 0.5),
     0 0 40px rgba(248, 210, 74, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .tabs {
@@ -140,17 +140,19 @@
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .select option {
   background: #1a1a24;
   color: #fff;
-  padding: 0.5rem;
+  padding: 12px;
+  font-size: 0.95rem;
 }
 
-.select option:checked,
-.select option:hover {
-  background: rgba(248, 210, 74, 0.2);
+.select option:checked {
+  background: rgba(248, 210, 74, 0.3);
   color: #f8d24a;
 }
 
