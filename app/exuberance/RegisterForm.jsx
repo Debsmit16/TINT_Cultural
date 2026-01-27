@@ -244,21 +244,19 @@ export default function RegisterForm() {
 
           <div className={styles.row}>
             <div className={styles.fieldGroup}>
-              <label className={styles.label} htmlFor="year">Year</label>
-              <select
+              <label className={styles.label} htmlFor="year">Year (1-4)</label>
+              <input
                 id="year"
                 name="year"
-                className={styles.select}
+                type="number"
+                min="1"
+                max="4"
+                className={styles.input}
+                placeholder="Enter year (1-4)"
                 value={formData.year}
                 onChange={handleChange}
                 required
-              >
-                <option value="">Select Year</option>
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-              </select>
+              />
             </div>
 
             <div className={styles.fieldGroup}>
