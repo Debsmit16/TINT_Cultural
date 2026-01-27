@@ -26,16 +26,18 @@ export async function GET() {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    const sports = await prisma.sport.findMany({
-      include: {
-        _count: {
-          select: { registrations: true },
-        },
-      },
-      orderBy: { name: 'asc' },
-    });
+    const sports = prisma.sport.findMany();
+    const registrations = prisma.registration.findMany();
 
-    return NextResponse.json(sports);
+    // Add registration count to each sport
+    const sportsWithCount = sports.map(sport => ({
+      ...sport,
+      _count: {
+        registrations: registrations.filter(r => r.sportId === sport.id).length
+      }
+    })).sort((a, b) => a.name.localeCompare(b.name));
+
+    return NextResponse.json(sportsWithCount);
   } catch (error) {
     console.error('Admin get sports error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
@@ -51,7 +53,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { name, slug, category, description, rules, image, maxTeamSize, minTeamSize } = body;
+    const { name, slug, category, description, rules, image, maxTeamSize, minTeamSize, venue, eventDate, isTeamEvent, isGirlsOnly, isActive } = body;
 
     if (!name || !slug || !category) {
       return NextResponse.json(
@@ -60,28 +62,34 @@ export async function POST(request) {
       );
     }
 
-    const sport = await prisma.sport.create({
-      data: {
-        name,
-        slug,
-        category,
-        description,
-        rules,
-        image,
-        maxTeamSize: maxTeamSize || 1,
-        minTeamSize: minTeamSize || 1,
-      },
+    // Check for duplicate slug
+    const existing = prisma.sport.findFirst({ slug });
+    if (existing) {
+      return NextResponse.json(
+        { error: 'Sport with this slug already exists' },
+        { status: 400 }
+      );
+    }
+
+    const sport = prisma.sport.create({
+      name,
+      slug,
+      category,
+      description: description || '',
+      rules: rules || '',
+      image: image || '',
+      maxTeamSize: maxTeamSize || 1,
+      minTeamSize: minTeamSize || 1,
+      venue: venue || '',
+      eventDate: eventDate || null,
+      isTeamEvent: isTeamEvent || false,
+      isGirlsOnly: isGirlsOnly || false,
+      isActive: isActive !== false,
     });
 
     return NextResponse.json(sport, { status: 201 });
   } catch (error) {
     console.error('Admin create sport error:', error);
-    if (error.code === 'P2002') {
-      return NextResponse.json(
-        { error: 'Sport with this name or slug already exists' },
-        { status: 400 }
-      );
-    }
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }

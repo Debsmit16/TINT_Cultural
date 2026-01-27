@@ -195,20 +195,41 @@ export default function ClientEffects() {
         footer.addEventListener('mouseleave', onFooterLeave, { passive: true });
       }
 
+      // Use transform instead of left/top for better GPU acceleration
+      ring.style.willChange = 'transform';
+      dot.style.willChange = 'transform';
+      
+      let cursorVisible = true;
+      const onCursorVis = () => {
+        cursorVisible = !document.hidden;
+        if (cursorVisible && !rafCursor) {
+          rafCursor = window.requestAnimationFrame(frame);
+        }
+      };
+      document.addEventListener('visibilitychange', onCursorVis);
+
       const frame = () => {
+        if (!cursorVisible) {
+          rafCursor = 0;
+          return;
+        }
+        
         ringX = lerp(ringX, targetX, 0.18);
         ringY = lerp(ringY, targetY, 0.18);
         dotX = lerp(dotX, targetX, 0.35);
         dotY = lerp(dotY, targetY, 0.35);
 
-        ring.style.left = ringX + 'px';
-        ring.style.top = ringY + 'px';
-        dot.style.left = dotX + 'px';
-        dot.style.top = dotY + 'px';
+        // Use transform for GPU acceleration
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+        dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
 
         rafCursor = window.requestAnimationFrame(frame);
       };
       rafCursor = window.requestAnimationFrame(frame);
+      
+      cleanups.push(() => {
+        document.removeEventListener('visibilitychange', onCursorVis);
+      });
     } else if (cursor && prefersReduced) {
       cursor.style.display = 'none';
       document.body.style.cursor = 'auto';
@@ -221,17 +242,22 @@ export default function ClientEffects() {
     let rafLiquid = 0;
     let liquidCleanup;
     if (canvas && ctx) {
-      let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      // Skip heavy simulation on low-end devices
+      const isLowEnd = navigator.hardwareConcurrency <= 4 || navigator.deviceMemory < 4;
+      let dpr = Math.max(1, Math.min(isLowEnd ? 1 : 2, window.devicePixelRatio || 1));
       let W = 0;
       let H = 0;
       let gridW = 0;
       let gridH = 0;
+      let frameCount = 0;
+      const FRAME_SKIP = isLowEnd ? 2 : 1; // Skip frames on low-end devices
 
       let u, v, u0, v0, d, d0, p, div;
 
       function alloc() {
-        gridW = Math.max(140, Math.floor(W / 9));
-        gridH = Math.max(90, Math.floor(H / 9));
+        // Reduced grid size for better performance
+        gridW = Math.max(80, Math.floor(W / (isLowEnd ? 14 : 11)));
+        gridH = Math.max(50, Math.floor(H / (isLowEnd ? 14 : 11)));
         const n = gridW * gridH;
         u = new Float32Array(n);
         v = new Float32Array(n);
@@ -294,7 +320,9 @@ export default function ClientEffects() {
         const w = gridW;
         const h = gridH;
         const a = diff;
-        for (let k = 0; k < iter; k++) {
+        // Reduced iterations for performance
+        const actualIter = Math.min(iter, 6);
+        for (let k = 0; k < actualIter; k++) {
           for (let y = 1; y < h - 1; y++) {
             for (let x1 = 1; x1 < w - 1; x1++) {
               const i = x1 + y * w;
@@ -315,7 +343,9 @@ export default function ClientEffects() {
           }
         }
 
-        for (let k = 0; k < iter; k++) {
+        // Reduced iterations for performance
+        const actualIter = Math.min(iter, 8);
+        for (let k = 0; k < actualIter; k++) {
           for (let y = 1; y < h - 1; y++) {
             for (let x = 1; x < w - 1; x++) {
               const i = x + y * w;
@@ -393,9 +423,24 @@ export default function ClientEffects() {
       window.addEventListener('pointermove', onPointerMove, { passive: true });
       window.addEventListener('mousemove', onPointerMove, { passive: true });
 
+      // Reusable offscreen canvas for better performance
+      let offCanvas = null;
+      let offCtx = null;
+      let imgData = null;
+      
+      function ensureOffCanvas() {
+        if (!offCanvas || offCanvas.width !== gridW || offCanvas.height !== gridH) {
+          offCanvas = document.createElement('canvas');
+          offCanvas.width = gridW;
+          offCanvas.height = gridH;
+          offCtx = offCanvas.getContext('2d');
+          imgData = ctx.createImageData(gridW, gridH);
+        }
+      }
+      
       function draw() {
-        const img = ctx.createImageData(gridW, gridH);
-        const data = img.data;
+        ensureOffCanvas();
+        const data = imgData.data;
         for (let i = 0; i < d.length; i++) {
           const dd = clamp(d[i], 0, 1.6);
           const t = clamp((dd - 0.35) / 1.1, 0, 1);
@@ -404,22 +449,18 @@ export default function ClientEffects() {
           const b = (ink.b * (1 - t) + ink.glowB * t) * (0.48 + dd * 0.46);
 
           const o = i * 4;
-          data[o + 0] = Math.floor(clamp(r, 0, 1) * 255);
-          data[o + 1] = Math.floor(clamp(g, 0, 1) * 255);
-          data[o + 2] = Math.floor(clamp(b, 0, 1) * 255);
-          data[o + 3] = Math.floor(clamp(0.80 * dd, 0, 0.88) * 255);
+          data[o + 0] = (clamp(r, 0, 1) * 255) | 0;
+          data[o + 1] = (clamp(g, 0, 1) * 255) | 0;
+          data[o + 2] = (clamp(b, 0, 1) * 255) | 0;
+          data[o + 3] = (clamp(0.80 * dd, 0, 0.88) * 255) | 0;
         }
 
-        const off = document.createElement('canvas');
-        off.width = gridW;
-        off.height = gridH;
-        const octx = off.getContext('2d');
-        octx.putImageData(img, 0, 0);
+        offCtx.putImageData(imgData, 0, 0);
 
         ctx.clearRect(0, 0, W, H);
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(off, 0, 0, W, H);
+        ctx.imageSmoothingQuality = 'medium';
+        ctx.drawImage(offCanvas, 0, 0, W, H);
 
         const g1 = ctx.createRadialGradient(W * 0.5, H * 0.25, 0, W * 0.5, H * 0.45, Math.max(W, H) * 0.75);
         g1.addColorStop(0, 'rgba(0,0,0,0)');
@@ -429,34 +470,52 @@ export default function ClientEffects() {
       }
 
       let lastT = performance.now();
+      let isPageVisible = true;
+      
+      const onVisChange = () => {
+        isPageVisible = !document.hidden;
+        if (isPageVisible) {
+          lastT = performance.now();
+          rafLiquid = window.requestAnimationFrame(step);
+        }
+      };
+      document.addEventListener('visibilitychange', onVisChange);
+
       const step = (t) => {
+        // Don't run when page is hidden
+        if (!isPageVisible) return;
+        
+        frameCount++;
         const dt = clamp((t - lastT) / 1000, 0.008, 0.022);
         lastT = t;
 
         const idle = t - lastMoveT > 110;
+        
+        // Skip physics on some frames for performance
+        if (frameCount % FRAME_SKIP === 0) {
+          u0.set(u);
+          v0.set(v);
+          d0.set(d);
 
-        u0.set(u);
-        v0.set(v);
-        d0.set(d);
+          diffuse(u, u0, idle ? 0.16 : 0.08, idle ? 6 : 4);
+          diffuse(v, v0, idle ? 0.16 : 0.08, idle ? 6 : 4);
+          project(u, v, p, div, idle ? 8 : 6);
 
-        diffuse(u, u0, idle ? 0.16 : 0.08, idle ? 12 : 8);
-        diffuse(v, v0, idle ? 0.16 : 0.08, idle ? 12 : 8);
-        project(u, v, p, div, idle ? 14 : 10);
+          u0.set(u);
+          v0.set(v);
+          advect(u, u0, u0, v0, dt * 38 * FRAME_SKIP, idle ? 0.985 : 0.992);
+          advect(v, v0, u0, v0, dt * 38 * FRAME_SKIP, idle ? 0.985 : 0.992);
+          project(u, v, p, div, idle ? 8 : 6);
 
-        u0.set(u);
-        v0.set(v);
-        advect(u, u0, u0, v0, dt * 38, idle ? 0.985 : 0.992);
-        advect(v, v0, u0, v0, dt * 38, idle ? 0.985 : 0.992);
-        project(u, v, p, div, idle ? 14 : 10);
+          d0.set(d);
+          advect(d, d0, u, v, dt * 34 * FRAME_SKIP, idle ? 0.986 : 0.994);
 
-        d0.set(d);
-        advect(d, d0, u, v, dt * 34, idle ? 0.986 : 0.994);
-
-        const decay = idle ? 0.992 : 0.997;
-        for (let i = 0; i < d.length; i++) d[i] *= decay;
-        for (let i = 0; i < u.length; i++) {
-          u[i] *= idle ? 0.985 : 0.993;
-          v[i] *= idle ? 0.985 : 0.993;
+          const decay = idle ? 0.992 : 0.997;
+          for (let i = 0; i < d.length; i++) d[i] *= decay;
+          for (let i = 0; i < u.length; i++) {
+            u[i] *= idle ? 0.985 : 0.993;
+            v[i] *= idle ? 0.985 : 0.993;
+          }
         }
 
         draw();
@@ -470,6 +529,7 @@ export default function ClientEffects() {
         window.removeEventListener('pointermove', onPointerMove);
         window.removeEventListener('mousemove', onPointerMove);
         window.removeEventListener('resize', onLiquidResize);
+        document.removeEventListener('visibilitychange', onVisChange);
       };
     }
 

@@ -9,7 +9,7 @@ import styles from './Admin.module.css';
 const NAV_ITEMS = [
   { href: '/admin', label: 'Dashboard', icon: '📊' },
   { href: '/admin/registrations', label: 'Registrations', icon: '📝' },
-  { href: '/admin/sports', label: 'Sports', icon: '🏆' },
+  { href: '/admin/sports', label: 'Sports / Events', icon: '🏆' },
   { href: '/admin/users', label: 'Users', icon: '👥' },
 ];
 
@@ -22,12 +22,12 @@ export default function AdminLayout({ children }) {
     if (status === 'loading') return;
     
     if (!session) {
-      router.push('/auth/login?callbackUrl=/admin');
+      router.push('/exuberance/login?callbackUrl=/admin');
       return;
     }
 
     if (session.user.role !== 'ADMIN' && session.user.role !== 'SUPER_ADMIN') {
-      router.push('/exuberance');
+      router.push('/exuberance/dashboard');
     }
   }, [session, status, router]);
 
@@ -52,7 +52,7 @@ export default function AdminLayout({ children }) {
     <div className={styles.wrap}>
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <Link href="/" className={styles.logo}>TINT</Link>
+          <Link href="/exuberance" className={styles.logo}>EXUBERANCE</Link>
           <span className={styles.badge}>Admin</span>
         </div>
 

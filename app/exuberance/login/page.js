@@ -1,20 +1,19 @@
 import Link from 'next/link';
 import styles from '../Exuberance.module.css';
-import FullGallery from './FullGallery.jsx';
-import fullStyles from './FullGallery.module.css';
-import { EXUBERANCE_GALLERY_FILES, EXUBERANCE_GALLERY_INITIAL_COUNT } from '../galleryFiles.js';
+import RegisterForm from '../RegisterForm.jsx';
 
 export const metadata = {
-  title: 'Exuberance Gallery | TINTWeb',
-  description: 'Full gallery — Exuberance.',
+  title: 'Login | Exuberance | TINTWeb',
+  description: 'Login or Register for Exuberance 2026 — Annual Sports Fest.',
 };
 
-export default function ExuberanceGalleryPage() {
+export default function LoginPage() {
   return (
     <div className={styles.wrap}>
       {/* Lightweight static background */}
       <div className={styles.staticBg} aria-hidden="true" />
 
+      {/* Navigation panel with logo on the left */}
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">
           <span className="brand__mark" aria-hidden="true">
@@ -43,37 +42,51 @@ export default function ExuberanceGalleryPage() {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
+          <Link href="/exuberance">Home</Link>
           <Link href="/exuberance#schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
-          <Link href="/exuberance#sponsors">Sponsors</Link>
           <Link href="/exuberance/committee">Committee</Link>
-          <Link className={styles.navActive} href="/exuberance/gallery" aria-current="page">
-            Gallery
-          </Link>
+          <Link href="/exuberance/gallery">Gallery</Link>
           <Link href="/exuberance/contact">Contact Us</Link>
-          <Link className={styles.cta} href="/exuberance#register">
-            Register
-          </Link>
         </nav>
-
-        <Link className={styles.momentsCta} href="/exuberance" aria-label="Back to Exuberance">
-          Back
-          <span className={styles.momentsCtaIcon} aria-hidden="true">
-            ←
-          </span>
-        </Link>
       </header>
 
       <main className={styles.main}>
-        <section id="gallery" className={`section ${styles.moments} ${fullStyles.pageSection}`}>
-          <div className={`${styles.momentsHead} ${fullStyles.pageHead}`}>
-            <h1 className={`${styles.momentsTitle} ${fullStyles.pageTitle}`}>
-              <span className={fullStyles.pageTitleGlow}>Gallery</span>
-            </h1>
+        <section className={styles.loginSection}>
+          <div className={styles.loginHead}>
+            <h1 className={styles.loginTitle}>EXUBERANCE 2026</h1>
+            <p className={styles.loginSub}>Login or Register to participate</p>
           </div>
 
-          <FullGallery files={EXUBERANCE_GALLERY_FILES} initialCount={EXUBERANCE_GALLERY_INITIAL_COUNT} />
+          <div className={styles.registerFormWrap}>
+            <RegisterForm />
+          </div>
+
+          <div className={styles.loginBack}>
+            <Link href="/exuberance" className={styles.backLink}>
+              ← Back to Exuberance
+            </Link>
+          </div>
         </section>
+
+        <footer className="footer">
+          <div className="footer__inner">
+            <div className="footer__brand">
+              <div className="footer__title">TINT</div>
+              <div className="footer__text">Exuberance — Sports • Spirit • Speed.</div>
+            </div>
+
+            <nav className="footer__links" aria-label="Footer">
+              <Link href="/exuberance">Exuberance</Link>
+              <Link href="/">Home</Link>
+            </nav>
+          </div>
+
+          <div className="footer__bottom">
+            <div>© {new Date().getFullYear()} TINT</div>
+            <div className="footer__fine">Built for the night.</div>
+          </div>
+        </footer>
       </main>
     </div>
   );

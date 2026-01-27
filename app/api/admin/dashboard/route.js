@@ -26,55 +26,51 @@ export async function GET() {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    const [
-      totalUsers,
-      totalRegistrations,
-      totalSports,
-      pendingRegistrations,
-      approvedRegistrations,
-      registrationsByStatus,
-      registrationsBySport,
-      recentRegistrations,
-    ] = await Promise.all([
-      prisma.user.count(),
-      prisma.registration.count(),
-      prisma.sport.count(),
-      prisma.registration.count({ where: { status: 'PENDING' } }),
-      prisma.registration.count({ where: { status: 'APPROVED' } }),
-      prisma.registration.groupBy({
-        by: ['status'],
-        _count: { status: true },
-      }),
-      prisma.registration.groupBy({
-        by: ['sportId'],
-        _count: { sportId: true },
-      }),
-      prisma.registration.findMany({
-        take: 10,
-        orderBy: { createdAt: 'desc' },
-        include: {
-          user: {
-            select: { name: true, email: true },
-          },
-          sport: {
-            select: { name: true },
-          },
-        },
-      }),
-    ]);
+    // Get all data from in-memory database
+    const users = prisma.user.findMany();
+    const sports = prisma.sport.findMany();
+    const registrations = prisma.registration.findMany();
 
-    // Get sport names for the chart
-    const sportIds = registrationsBySport.map((r) => r.sportId);
-    const sports = await prisma.sport.findMany({
-      where: { id: { in: sportIds } },
-      select: { id: true, name: true },
+    // Calculate stats
+    const totalUsers = users.length;
+    const totalSports = sports.length;
+    const totalRegistrations = registrations.length;
+    const pendingRegistrations = registrations.filter(r => r.status === 'PENDING').length;
+    const approvedRegistrations = registrations.filter(r => r.status === 'APPROVED').length;
+
+    // Group by status
+    const registrationsByStatus = ['PENDING', 'APPROVED', 'REJECTED'].map(status => ({
+      status,
+      _count: { status: registrations.filter(r => r.status === status).length }
+    }));
+
+    // Group by sport
+    const sportCounts = {};
+    registrations.forEach(reg => {
+      sportCounts[reg.sportId] = (sportCounts[reg.sportId] || 0) + 1;
+    });
+    
+    const registrationsBySportWithNames = Object.entries(sportCounts).map(([sportId, count]) => {
+      const sport = sports.find(s => s.id === sportId);
+      return {
+        sport: sport?.name || 'Unknown',
+        count
+      };
     });
 
-    const sportMap = Object.fromEntries(sports.map((s) => [s.id, s.name]));
-    const registrationsBySportWithNames = registrationsBySport.map((r) => ({
-      sport: sportMap[r.sportId] || 'Unknown',
-      count: r._count.sportId,
-    }));
+    // Recent registrations with user and sport details
+    const recentRegistrations = registrations
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 10)
+      .map(reg => {
+        const user = users.find(u => u.id === reg.userId);
+        const sport = sports.find(s => s.id === reg.sportId);
+        return {
+          ...reg,
+          user: user ? { name: user.name, email: user.email } : null,
+          sport: sport ? { name: sport.name } : null
+        };
+      });
 
     return NextResponse.json({
       stats: {

@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import ClientEffects from '../../../components/ClientEffects.jsx';
 import styles from '../../Exuberance.module.css';
-import SportBg from '../../SportBg.jsx';
 import localStyles from './Event.module.css';
 import { EVENT_DETAILS } from '../eventDetails';
 
@@ -20,19 +18,8 @@ export default function ActivityDetailsPage({ params }) {
 
   return (
     <div className={styles.wrap}>
-      <ClientEffects />
-
-      <div className="cursor" aria-hidden="true">
-        <div className="cursor__ring"></div>
-        <div className="cursor__dot"></div>
-      </div>
-
-      <div className="bg" aria-hidden="true">
-        <SportBg className={styles.sport} />
-        <div className="bg__vignette"></div>
-      </div>
-
-      <div className={styles.fx} aria-hidden="true" />
+      {/* Lightweight static background */}
+      <div className={styles.staticBg} aria-hidden="true" />
 
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">

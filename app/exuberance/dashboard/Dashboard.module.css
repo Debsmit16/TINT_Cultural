@@ -1,0 +1,646 @@
+.wrap {
+  min-height: 100vh;
+  position: relative;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  padding-right: 20px;
+}
+
+.nav a {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav a:hover {
+  color: var(--tint, #f8d24a);
+  background: rgba(248, 210, 74, 0.1);
+}
+
+.navActive {
+  color: var(--tint, #f8d24a) !important;
+  background: rgba(248, 210, 74, 0.15) !important;
+}
+
+.main {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.loadingWrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: #0a0a0f;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(248, 210, 74, 0.2);
+  border-top-color: var(--tint, #f8d24a);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 40px 20px 60px;
+  text-align: center;
+}
+
+.welcomeBox {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.welcomeTitle {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.userName {
+  color: var(--tint, #f8d24a);
+  text-shadow: 0 0 30px rgba(248, 210, 74, 0.4);
+}
+
+.welcomeSub {
+  margin: 0.75rem 0 0;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+}
+
+/* Cards Section */
+.cardsSection {
+  padding: 20px 20px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.sectionSub {
+  margin: 0.5rem 0 2rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.eventCard {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px;
+  background: linear-gradient(
+    145deg,
+    rgba(20, 20, 30, 0.85),
+    rgba(10, 10, 18, 0.92)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.eventCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-color);
+  opacity: 0.8;
+}
+
+.eventCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-color);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(248, 210, 74, 0.08);
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: var(--card-color);
+}
+
+.cardContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.cardSubtitle {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--card-color);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cardDesc {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+.cardMeta {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cardDate,
+.cardVenue {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cardLimit {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #fbbf24;
+}
+
+.cardArrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.eventCard:hover .cardArrow {
+  background: var(--card-color);
+  color: #0a0a0f;
+}
+
+/* Rules Section */
+.rulesSection {
+  padding: 40px 20px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rulesList {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ruleItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.ruleIcon {
+  font-size: 1.1rem;
+}
+
+.ruleItem p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .eventCard {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
+  }
+  
+  .cardIcon {
+    margin: 0 auto;
+  }
+  
+  .cardMeta {
+    justify-content: center;
+  }
+  
+  .cardArrow {
+    position: static;
+    transform: none;
+    margin: 16px auto 0;
+  }
+  
+  .nav {
+    gap: 12px;
+  }
+}
+
+/* TASO ID Display */
+.tasoIdDisplay {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 12px;
+}
+
+.tasoIdLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.tasoIdCode {
+  color: #22c55e;
+  font-family: "Space Mono", monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Registrations Section */
+.registrationsSection {
+  padding: 20px 20px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.idCardBtn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(248, 210, 74, 0.2) 0%, rgba(248, 210, 74, 0.1) 100%);
+  border: 1px solid rgba(248, 210, 74, 0.4);
+  border-radius: 8px;
+  color: #f8d24a;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.idCardBtn:hover {
+  background: rgba(248, 210, 74, 0.3);
+  transform: translateY(-2px);
+}
+
+.registrationsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.regCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.regCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.regHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.regCategory {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.regStatus {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.statusPENDING {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.statusAPPROVED {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.statusREJECTED {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.regSport {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.regDetails {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.regDetails p {
+  margin: 0.25rem 0;
+}
+
+.regDate {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ID Card Modal */
+.idCardModal {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.idCardWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.idCard {
+  width: 320px;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid rgba(248, 210, 74, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.idCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.idCardLogo {
+  font-size: 2rem;
+}
+
+.idCardTitle {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f8d24a;
+  letter-spacing: 0.1em;
+}
+
+.idCardSubtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.idCardPhoto {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.idCardAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  border: 3px solid rgba(248, 210, 74, 0.5);
+}
+
+.idCardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.idCardField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.idCardLabel {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.idCardValue {
+  font-size: 0.9rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.idCardEvents {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.idCardEventList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.idCardEventTag {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 4px;
+  color: #22c55e;
+}
+
+.idCardFooter {
+  text-align: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.idCardFooter p {
+  margin: 0.2rem 0;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.exportBtn {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exportBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+}
+
+/* Event Card Disabled State */
+.eventCardDisabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.eventCardDisabled::after {
+  content: 'LIMIT REACHED';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.9);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 480px) {
+  .idCard {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .tasoIdDisplay {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}

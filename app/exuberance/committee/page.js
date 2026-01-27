@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import ClientEffects from '../../components/ClientEffects.jsx';
 import styles from '../Exuberance.module.css';
 import localStyles from './Committee.module.css';
 import { CORE_COMMITTEE, FACULTY } from './committeeData.js';
@@ -51,15 +50,8 @@ function InstagramIcon() {
 export default function CommitteePage() {
   return (
     <div className={localStyles.wrap}>
-      <ClientEffects />
-
-      {/* Custom cursor (same as home/exuberance) */}
-      <div className="cursor" aria-hidden="true">
-        <div className="cursor__ring"></div>
-        <div className="cursor__dot"></div>
-      </div>
-
-      <div className={localStyles.bgSpecial} aria-hidden="true" />
+      {/* Lightweight static background */}
+      <div className={styles.staticBg} aria-hidden="true" />
 
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">

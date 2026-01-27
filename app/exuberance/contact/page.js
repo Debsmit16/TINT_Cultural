@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import ClientEffects from '../../components/ClientEffects.jsx';
 import styles from '../Exuberance.module.css';
 import localStyles from './Contact.module.css';
 import ContactTeams from './ContactTeams.jsx';
@@ -12,14 +11,8 @@ export const metadata = {
 export default function ContactUsPage() {
   return (
     <div className={localStyles.wrap}>
-      <ClientEffects />
-
-      <div className="cursor" aria-hidden="true">
-        <div className="cursor__ring"></div>
-        <div className="cursor__dot"></div>
-      </div>
-
-      <div className={localStyles.bg} aria-hidden="true" />
+      {/* Lightweight static background */}
+      <div className={styles.staticBg} aria-hidden="true" />
 
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">

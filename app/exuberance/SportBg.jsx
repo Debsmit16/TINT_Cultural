@@ -27,15 +27,23 @@ export default function SportBg({ className }) {
 
     // Adjustable speed multiplier (1 = default). Keeping as a local constant avoids changing any other code.
     const SPEED = 1;
+    
+    // Performance: detect low-end devices
+    const isLowEnd = navigator.hardwareConcurrency <= 4 || (navigator.deviceMemory && navigator.deviceMemory < 4);
+    const TARGET_FPS = isLowEnd ? 30 : 60;
+    const FRAME_TIME = 1000 / TARGET_FPS;
 
-    let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    let dpr = Math.max(1, Math.min(isLowEnd ? 1 : 2, window.devicePixelRatio || 1));
     let width = 0;
     let height = 0;
     let raf = 0;
+    let lastFrameTime = 0;
+    let isPageVisible = true;
 
     let spacing = 80; // world units between grid lines
-    let xLines = 30;
-    let zLines = 34;
+    // Reduced line counts for performance
+    let xLines = isLowEnd ? 18 : 24;
+    let zLines = isLowEnd ? 20 : 26;
 
     const state = {
       lastTime: performance.now(),
@@ -53,10 +61,10 @@ export default function SportBg({ className }) {
     }
 
     function rebuildGrid() {
-      // Bigger boxes + fewer lines for a prominent, lightweight single sheet.
+      // Reduced line counts for performance while maintaining visual appeal
       spacing = clamp(Math.min(width, height) * 0.14, 56, 120);
-      xLines = clamp(Math.floor(width / spacing) + 8, 16, 34);
-      zLines = clamp(Math.floor(height / spacing) + 10, 18, 40);
+      xLines = clamp(Math.floor(width / spacing) + 4, 12, isLowEnd ? 22 : 28);
+      zLines = clamp(Math.floor(height / spacing) + 6, 14, isLowEnd ? 28 : 34);
     }
 
     function project(x, z, vanX, vanY, yBottom) {
@@ -70,7 +78,17 @@ export default function SportBg({ className }) {
       return { x: xProj, y, f };
     }
 
-    function draw() {
+    function draw(timestamp) {
+      // Don't run when page is hidden
+      if (!isPageVisible) return;
+      
+      // Throttle to target FPS
+      if (timestamp - lastFrameTime < FRAME_TIME) {
+        raf = window.requestAnimationFrame(draw);
+        return;
+      }
+      lastFrameTime = timestamp;
+
       const now = performance.now();
       const dt = clamp((now - state.lastTime) / 1000, 0.001, 0.05);
       state.lastTime = now;
@@ -145,10 +163,13 @@ export default function SportBg({ className }) {
     raf = window.requestAnimationFrame(draw);
 
     const onVis = () => {
-      if (document.hidden) {
-        window.cancelAnimationFrame(raf);
-      } else {
+      isPageVisible = !document.hidden;
+      if (isPageVisible) {
+        state.lastTime = performance.now();
+        lastFrameTime = 0;
         raf = window.requestAnimationFrame(draw);
+      } else {
+        window.cancelAnimationFrame(raf);
       }
     };
 

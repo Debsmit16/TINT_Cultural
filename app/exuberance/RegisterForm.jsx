@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import styles from './RegisterForm.module.css';
 
 const DEPARTMENTS = [
@@ -133,8 +133,10 @@ export default function RegisterForm() {
       if (result?.error) {
         setError('Invalid email or password');
       } else {
-        setSuccess('Logged in successfully!');
-        router.refresh();
+        setSuccess('Logged in successfully! Redirecting...');
+        setTimeout(() => {
+          router.push('/exuberance/dashboard');
+        }, 1000);
       }
     } catch (err) {
       setError('Something went wrong. Please try again.');
@@ -143,7 +145,7 @@ export default function RegisterForm() {
     }
   };
 
-  // If user is logged in, show welcome message
+  // If user is logged in, show welcome message with dashboard link
   if (status === 'authenticated' && session?.user) {
     return (
       <div className={styles.card}>
@@ -156,11 +158,17 @@ export default function RegisterForm() {
           </div>
           <h3 className={styles.welcomeTitle}>Welcome, {session.user.name}!</h3>
           <p className={styles.welcomeText}>
-            You&apos;re registered for Exuberance 2026. Check your email for updates and event schedules.
+            You&apos;re logged in. Go to dashboard to register for events.
           </p>
+          <a 
+            href="/exuberance/dashboard"
+            className={styles.dashboardBtn}
+          >
+            Go to Dashboard →
+          </a>
           <button 
             className={styles.logoutBtn}
-            onClick={() => signIn('credentials', { redirect: false }).then(() => router.refresh())}
+            onClick={() => signOut({ redirect: false }).then(() => router.refresh())}
             type="button"
           >
             Sign Out

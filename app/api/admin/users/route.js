@@ -26,26 +26,30 @@ export async function GET() {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    const users = await prisma.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        phone: true,
-        college: true,
-        department: true,
-        year: true,
-        rollNumber: true,
-        role: true,
-        createdAt: true,
-        _count: {
-          select: { registrations: true },
-        },
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+    const users = prisma.user.findMany();
+    const registrations = prisma.registration.findMany();
 
-    return NextResponse.json(users);
+    // Add registration count and format response
+    const usersWithCounts = users
+      .map(user => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        college: user.college,
+        department: user.department,
+        year: user.year,
+        rollNumber: user.rollNumber,
+        role: user.role,
+        gender: user.gender,
+        createdAt: user.createdAt,
+        _count: {
+          registrations: registrations.filter(r => r.userId === user.id).length,
+        },
+      }))
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    return NextResponse.json(usersWithCounts);
   } catch (error) {
     console.error('Admin get users error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });

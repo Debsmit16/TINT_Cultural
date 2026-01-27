@@ -283,6 +283,27 @@
   color: #fff;
 }
 
+.dashboardBtn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(135deg, var(--tint, #f8d24a) 0%, #e5b800 100%);
+  border: none;
+  border-radius: 10px;
+  color: #0a0a0f;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(248, 210, 74, 0.25);
+}
+
+.dashboardBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(248, 210, 74, 0.35);
+}
+
 @media (max-width: 560px) {
   .card {
     border-radius: 16px;

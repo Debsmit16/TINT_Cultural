@@ -84,9 +84,14 @@ model Sport {
   description String?  @db.Text
   rules       String?  @db.Text
   image       String?
+  venue       String?
+  eventDate   String?  // e.g., "5th Feb 2026"
   maxTeamSize Int      @default(1)
   minTeamSize Int      @default(1)
+  isTeamEvent Boolean  @default(false)
+  isGirlsOnly Boolean  @default(false)
   isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -96,10 +101,29 @@ model Sport {
 
 model Registration {
   id          String   @id @default(cuid())
+  tasoId      String   @unique // TASOTINT2K26#XXXXXX format
+  tasoNumber  Int      @unique @default(autoincrement()) // Sequential number for ID generation
   userId      String
   sportId     String
   teamName    String?
   status      RegistrationStatus @default(PENDING)
+  
+  // Participant details at time of registration
+  participantName String?
+  participantPhone String?
+  participantDept String?
+  participantYear String?
+  participantRollNo String?
+  participantGender String?
+  
+  // Captain/Team details for team sports
+  captainName String?
+  viceCaptainName String?
+  goalkeeperName String? // Football only
+  
+  // File uploads (store paths)
+  idProofPath String?
+  teamListPath String?
   
   // Payment info
   paymentStatus PaymentStatus @default(PENDING)
@@ -112,7 +136,7 @@ model Registration {
   sport       Sport    @relation(fields: [sportId], references: [id], onDelete: Cascade)
   teamMembers TeamMember[]
   
-  @@unique([userId, sportId])
+  @@index([tasoNumber])
 }
 
 model TeamMember {

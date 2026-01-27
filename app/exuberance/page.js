@@ -1,10 +1,7 @@
 import Link from 'next/link';
-import ClientEffects from '../components/ClientEffects.jsx';
 import styles from './Exuberance.module.css';
-import SportBg from './SportBg.jsx';
 import PastYearsCarousels from './PastYearsCarousels.jsx';
 import ExuberanceGallery from './ExuberanceGallery.jsx';
-import RegisterForm from './RegisterForm.jsx';
 import { EXUBERANCE_GALLERY_FILES, EXUBERANCE_GALLERY_INITIAL_COUNT } from './galleryFiles.js';
 import { slugFromEventTitle } from './activities/eventDetails.js';
 
@@ -74,23 +71,8 @@ export default function ExuberancePage() {
 
   return (
     <div className={styles.wrap}>
-      {/* Keep the same premium client-side background dynamics */}
-      <ClientEffects />
-
-      {/* Custom cursor (same as home) */}
-      <div className="cursor" aria-hidden="true">
-        <div className="cursor__ring"></div>
-        <div className="cursor__dot"></div>
-      </div>
-
-      {/* Background (liquid sky canvas) */}
-      <div className="bg" aria-hidden="true">
-        <SportBg className={styles.sport} />
-        <div className="bg__vignette"></div>
-      </div>
-
-      {/* Page-specific extra ambient motion */}
-      <div className={styles.fx} aria-hidden="true" />
+      {/* Lightweight static background */}
+      <div className={styles.staticBg} aria-hidden="true" />
 
       {/* Navigation panel with logo on the left */}
       <header className="topbar">
@@ -127,9 +109,9 @@ export default function ExuberancePage() {
           <Link href="/exuberance/committee">Committee</Link>
           <Link href="/exuberance/gallery">Gallery</Link>
           <Link href="/exuberance/contact">Contact Us</Link>
-          <a className={styles.cta} href="#register">
-            Register
-          </a>
+          <Link className={styles.cta} href="/exuberance/login">
+            Login
+          </Link>
         </nav>
       </header>
 
@@ -268,10 +250,6 @@ export default function ExuberancePage() {
             <p className={styles.joinSub}>Be a part of Exuberance</p>
           </div>
 
-          <div className={styles.registerFormWrap}>
-            <RegisterForm />
-          </div>
-
           <div className={styles.joinGrid} aria-label="Event details">
             <div className={styles.joinCard} aria-label="Dates">
               <div className={styles.joinIcon} aria-hidden="true">
@@ -351,9 +329,9 @@ export default function ExuberancePage() {
           </div>
 
           <div className={styles.joinFoot}>
-            <a className={styles.joinCta} href="#register" aria-label="Register now">
-              Register Now
-            </a>
+            <Link className={styles.joinCta} href="/exuberance/login" aria-label="Login now">
+              Login / Register
+            </Link>
 
             <a
               className={styles.joinBrochure}

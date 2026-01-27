@@ -26,20 +26,23 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    const sport = await prisma.sport.findUnique({
-      where: { id: params.id },
-      include: {
-        _count: {
-          select: { registrations: true },
-        },
-      },
-    });
+    const { id } = await params;
+    const sport = prisma.sport.findUnique(id);
+    const registrations = prisma.registration.findMany();
 
     if (!sport) {
       return NextResponse.json({ error: 'Sport not found' }, { status: 404 });
     }
 
-    return NextResponse.json(sport);
+    // Add registration count
+    const sportWithCount = {
+      ...sport,
+      _count: {
+        registrations: registrations.filter(r => r.sportId === sport.id).length
+      }
+    };
+
+    return NextResponse.json(sportWithCount);
   } catch (error) {
     console.error('Admin get sport error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
@@ -54,8 +57,9 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
+    const { id } = await params;
     const body = await request.json();
-    const { name, slug, category, description, rules, image, maxTeamSize, minTeamSize, isActive } = body;
+    const { name, slug, category, description, rules, image, maxTeamSize, minTeamSize, isActive, venue, eventDate, isTeamEvent, isGirlsOnly } = body;
 
     const updateData = {};
     if (name !== undefined) updateData.name = name;
@@ -67,21 +71,20 @@ export async function PATCH(request, { params }) {
     if (maxTeamSize !== undefined) updateData.maxTeamSize = maxTeamSize;
     if (minTeamSize !== undefined) updateData.minTeamSize = minTeamSize;
     if (isActive !== undefined) updateData.isActive = isActive;
+    if (venue !== undefined) updateData.venue = venue;
+    if (eventDate !== undefined) updateData.eventDate = eventDate;
+    if (isTeamEvent !== undefined) updateData.isTeamEvent = isTeamEvent;
+    if (isGirlsOnly !== undefined) updateData.isGirlsOnly = isGirlsOnly;
 
-    const sport = await prisma.sport.update({
-      where: { id: params.id },
-      data: updateData,
-    });
+    const sport = prisma.sport.update(id, updateData);
+
+    if (!sport) {
+      return NextResponse.json({ error: 'Sport not found' }, { status: 404 });
+    }
 
     return NextResponse.json(sport);
   } catch (error) {
     console.error('Admin update sport error:', error);
-    if (error.code === 'P2002') {
-      return NextResponse.json(
-        { error: 'Sport with this name or slug already exists' },
-        { status: 400 }
-      );
-    }
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }
@@ -94,11 +97,26 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    await prisma.sport.delete({
-      where: { id: params.id },
-    });
+    const { id } = await params;
+    
+    // Check if sport has registrations
+    const registrations = prisma.registration.findMany();
+    const hasRegistrations = registrations.some(r => r.sportId === id);
+    
+    if (hasRegistrations) {
+      return NextResponse.json(
+        { error: 'Cannot delete sport with existing registrations. Delete registrations first.' },
+        { status: 400 }
+      );
+    }
 
-    return NextResponse.json({ message: 'Sport deleted successfully' });
+    const deleted = prisma.sport.delete(id);
+    
+    if (!deleted) {
+      return NextResponse.json({ error: 'Sport not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, message: 'Sport deleted successfully' });
   } catch (error) {
     console.error('Admin delete sport error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });

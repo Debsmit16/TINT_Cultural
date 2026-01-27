@@ -26,31 +26,34 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    const registration = await prisma.registration.findUnique({
-      where: { id: params.id },
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            phone: true,
-            college: true,
-            department: true,
-            year: true,
-            rollNumber: true,
-          },
-        },
-        sport: true,
-        teamMembers: true,
-      },
-    });
-
+    const { id } = await params;
+    const registration = prisma.registration.findUnique(id);
+    
     if (!registration) {
       return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
     }
 
-    return NextResponse.json(registration);
+    // Add user and sport details
+    const users = prisma.user.findMany();
+    const sports = prisma.sport.findMany();
+    const user = users.find(u => u.id === registration.userId);
+    const sport = sports.find(s => s.id === registration.sportId);
+
+    return NextResponse.json({
+      ...registration,
+      user: user ? {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        college: user.college,
+        department: user.department,
+        year: user.year,
+        rollNumber: user.rollNumber,
+        gender: user.gender,
+      } : null,
+      sport: sport || null,
+    });
   } catch (error) {
     console.error('Admin get registration error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
@@ -65,6 +68,7 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
+    const { id } = await params;
     const body = await request.json();
     const { status, paymentStatus } = body;
 
@@ -72,23 +76,26 @@ export async function PATCH(request, { params }) {
     if (status) updateData.status = status;
     if (paymentStatus) updateData.paymentStatus = paymentStatus;
 
-    const registration = await prisma.registration.update({
-      where: { id: params.id },
-      data: updateData,
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          },
-        },
-        sport: true,
-        teamMembers: true,
+    const registration = prisma.registration.update(id, updateData);
+
+    if (!registration) {
+      return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
+    }
+
+    // Add user and sport details
+    const users = prisma.user.findMany();
+    const sports = prisma.sport.findMany();
+    const user = users.find(u => u.id === registration.userId);
+    const sport = sports.find(s => s.id === registration.sportId);
+
+    return NextResponse.json({
+      success: true,
+      registration: {
+        ...registration,
+        user: user ? { id: user.id, name: user.name, email: user.email } : null,
+        sport: sport || null,
       },
     });
-
-    return NextResponse.json(registration);
   } catch (error) {
     console.error('Admin update registration error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
@@ -103,11 +110,14 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: adminCheck.error }, { status: adminCheck.status });
     }
 
-    await prisma.registration.delete({
-      where: { id: params.id },
-    });
+    const { id } = await params;
+    const deleted = prisma.registration.delete(id);
 
-    return NextResponse.json({ message: 'Registration deleted successfully' });
+    if (!deleted) {
+      return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, message: 'Registration deleted successfully' });
   } catch (error) {
     console.error('Admin delete registration error:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
