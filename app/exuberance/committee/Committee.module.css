@@ -64,6 +64,43 @@
 
 .track::-webkit-scrollbar{display:none}
 
+.trackWrap{
+  position:relative;
+}
+
+.trackWrap [data-track-arrow]{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(0,220,255,.28);
+  background:rgba(0,0,0,.35);
+  color:rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:2;
+  box-shadow:0 18px 55px rgba(0,0,0,.35);
+}
+
+.trackWrap [data-track-arrow="left"]{left:-6px}
+.trackWrap [data-track-arrow="right"]{right:-6px}
+
+.trackWrap [data-track-arrow]:hover{
+  border-color:rgba(0,220,255,.55);
+  box-shadow:0 22px 70px rgba(0,0,0,.55), 0 0 60px rgba(0,220,255,.14);
+}
+
+@media (max-width: 640px){
+  .trackWrap [data-track-arrow]{
+    width:40px;
+    height:40px;
+  }
+}
+
 .card{
   scroll-snap-align:start;
   flex:0 0 auto;
@@ -110,6 +147,20 @@
   text-transform:uppercase;
   font-size:12px;
   color:rgba(255,255,255,.92);
+}
+
+/* Faculty-specific adjustments (do not affect Core Committee cards) */
+.facultyTrack .img{
+  transform:none;
+  object-position:50% 20%;
+}
+
+.facultyTrack .card:hover .img{transform:scale(1.05)}
+
+.facultyName{
+  text-transform:none;
+  letter-spacing:.02em;
+  font-size:13px;
 }
 
 .role{

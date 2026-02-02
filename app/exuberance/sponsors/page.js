@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import ClientEffects from '../../components/ClientEffects.jsx';
 import styles from '../Exuberance.module.css';
 import localStyles from './Sponsors.module.css';
 
@@ -11,13 +10,6 @@ export const metadata = {
 export default function SponsorsPage() {
   return (
     <div className={styles.wrap}>
-      <ClientEffects />
-
-      <div className="cursor" aria-hidden="true">
-        <div className="cursor__ring"></div>
-        <div className="cursor__dot"></div>
-      </div>
-
       <div
         className="bg"
         style={{ background: 'url("/background/sponsors_bg.avif") center/cover no-repeat' }}
@@ -29,18 +21,17 @@ export default function SponsorsPage() {
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">
           <span className="brand__mark" aria-hidden="true">
-            <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M32 6C20.4 6 11 15.4 11 27c0 9.2 5.9 17 14.2 19.9L32 58l6.8-11.1C47.1 44 53 36.2 53 27 53 15.4 43.6 6 32 6Z"
-                stroke="rgba(255,255,255,0.75)"
-                strokeWidth="2.6"
-              />
-              <path d="M22 28.5c6.5-9.2 17.6-13 28-10.4" stroke="#f8d24a" strokeWidth="2.6" strokeLinecap="round" />
-              <path d="M20 34c9.3 4.5 19.7 4.6 30 0" stroke="rgba(151,203,255,0.85)" strokeWidth="2.6" strokeLinecap="round" />
-              <circle cx="32" cy="26" r="3.2" fill="#f8d24a" />
-            </svg>
+            <img
+              src="/logos/exuberance_logo.webp"
+              alt=""
+              width="46"
+              height="46"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
           </span>
-          <span className="brand__text">TINT</span>
+          <span className="brand__text" style={{ color: 'cyan' }}>
+            EXUBERANCE
+          </span>
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">

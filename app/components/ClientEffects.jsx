@@ -13,7 +13,12 @@ function lerp(a, b, t) {
 export default function ClientEffects() {
   useEffect(() => {
     // Enable JS-only behaviors (and JS-gated reveal animation)
-    document.documentElement.classList.add('js');
+    // Reference-counted so navigating away to pages that don't use ClientEffects
+    // won't leave the whole app stuck in the `html.js` (hidden reveal) state.
+    const COUNT_KEY = '__tintClientEffectsCount';
+    const nextCount = (window[COUNT_KEY] || 0) + 1;
+    window[COUNT_KEY] = nextCount;
+    if (nextCount === 1) document.documentElement.classList.add('js');
 
     // PWA: register service worker only for real production hosts.
     // On localhost (even if NODE_ENV=production) we force-disable SW + caches to prevent stale visuals.
@@ -534,6 +539,11 @@ export default function ClientEffects() {
     }
 
     return () => {
+      const prevCount = window[COUNT_KEY] || 0;
+      const finalCount = Math.max(0, prevCount - 1);
+      window[COUNT_KEY] = finalCount;
+      if (finalCount === 0) document.documentElement.classList.remove('js');
+
       if (revealIO) revealIO.disconnect();
 
       if (rafCursor) window.cancelAnimationFrame(rafCursor);

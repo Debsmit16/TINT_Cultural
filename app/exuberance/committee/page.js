@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import styles from '../Exuberance.module.css';
 import localStyles from './Committee.module.css';
-import { CORE_COMMITTEE, FACULTY } from './committeeData.js';
+import { CORE_COMMITTEE } from './committeeData.js';
+import ScrollableTrack from './ScrollableTrack.jsx';
+import fs from 'fs';
+import path from 'path';
 
 export const metadata = {
   title: 'Exuberance Committee | TINTWeb',
@@ -11,6 +14,55 @@ export const metadata = {
 function imgSrcFromFile(fileName) {
   if (!fileName) return 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80';
   return `/photos/photo_webp/Webp/${encodeURIComponent(fileName)}`;
+}
+
+function facultyImgSrcFromFile(fileName) {
+  if (!fileName) return 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80';
+  return `/faculty/${encodeURIComponent(fileName)}`;
+}
+
+function displayNameFromFileName(fileName) {
+  const base = path.basename(fileName, path.extname(fileName));
+  return base.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function getFacultyFromPublicDir() {
+  const dir = path.join(process.cwd(), 'public', 'faculty');
+  let files = [];
+  try {
+    files = fs.readdirSync(dir);
+  } catch {
+    files = [];
+  }
+
+  const allowed = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.heic']);
+  const items = files
+    .filter((f) => allowed.has(path.extname(f).toLowerCase()))
+    .map((fileName) => ({
+      fileName,
+      name: displayNameFromFileName(fileName),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const normalize = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const featuredNames = [
+    'Dr. Ayan Chakrabarty',
+    'Dr. Soma Chatterjee Ghosh',
+    'Dr. Swagata Paul',
+  ].map(normalize);
+
+  const featured = [];
+  const rest = [];
+  for (const it of items) {
+    const n = normalize(it.name);
+    if (featuredNames.includes(n)) featured.push(it);
+    else rest.push(it);
+  }
+
+  // Keep featured in the exact requested order
+  featured.sort((a, b) => featuredNames.indexOf(normalize(a.name)) - featuredNames.indexOf(normalize(b.name)));
+
+  return { featured, rest };
 }
 
 function LinkedInIcon() {
@@ -48,6 +100,11 @@ function InstagramIcon() {
 }
 
 export default function CommitteePage() {
+  const { featured: facultyFeatured, rest: facultyRest } = getFacultyFromPublicDir();
+  const splitAt = Math.ceil(facultyRest.length / 2);
+  const facultyRestA = facultyRest.slice(0, splitAt);
+  const facultyRestB = facultyRest.slice(splitAt);
+
   return (
     <div className={localStyles.wrap}>
       {/* Lightweight static background */}
@@ -56,18 +113,17 @@ export default function CommitteePage() {
       <header className="topbar">
         <Link className="brand" href="/" aria-label="TINT Home">
           <span className="brand__mark" aria-hidden="true">
-            <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M32 6C20.4 6 11 15.4 11 27c0 9.2 5.9 17 14.2 19.9L32 58l6.8-11.1C47.1 44 53 36.2 53 27 53 15.4 43.6 6 32 6Z"
-                stroke="rgba(255,255,255,0.75)"
-                strokeWidth="2.6"
-              />
-              <path d="M22 28.5c6.5-9.2 17.6-13 28-10.4" stroke="#f8d24a" strokeWidth="2.6" strokeLinecap="round" />
-              <path d="M20 34c9.3 4.5 19.7 4.6 30 0" stroke="rgba(151,203,255,0.85)" strokeWidth="2.6" strokeLinecap="round" />
-              <circle cx="32" cy="26" r="3.2" fill="#f8d24a" />
-            </svg>
+            <img
+              src="/logos/exuberance_logo.webp"
+              alt=""
+              width="46"
+              height="46"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
           </span>
-          <span className="brand__text">TINT</span>
+          <span className="brand__text" style={{ color: 'cyan' }}>
+            EXUBERANCE
+          </span>
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
@@ -97,22 +153,65 @@ export default function CommitteePage() {
           <h1 className={localStyles.heading}>Meet Our Organisers</h1>
 
           <h2 className={localStyles.subHeading}>Faculty</h2>
-          <div className={localStyles.track} aria-label="Faculty carousel">
-            {FACULTY.map((m) => (
-              <article key={m.id} className={localStyles.card} aria-label={m.name}>
+          <ScrollableTrack
+            ariaLabel="Faculty carousel"
+            className={localStyles.trackWrap}
+            scrollerClassName={`${localStyles.track} ${localStyles.facultyTrack}`}
+          >
+            {facultyFeatured.map((m) => (
+              <article key={m.fileName} className={localStyles.card} aria-label={m.name}>
                 <div className={localStyles.media}>
-                  <img className={localStyles.img} src={imgSrcFromFile(m.imgFile)} alt={m.name} loading="lazy" />
+                  <img className={localStyles.img} src={facultyImgSrcFromFile(m.fileName)} alt={m.name} loading="lazy" />
                 </div>
                 <div className={localStyles.meta}>
-                  <div className={localStyles.name}>{m.name}</div>
-                  <div className={localStyles.role}>{m.designation}</div>
+                  <div className={`${localStyles.name} ${localStyles.facultyName}`}>{m.name}</div>
                 </div>
               </article>
             ))}
-          </div>
+          </ScrollableTrack>
+
+          <ScrollableTrack
+            ariaLabel="Faculty carousel (more faculty 1)"
+            className={localStyles.trackWrap}
+            scrollerClassName={`${localStyles.track} ${localStyles.facultyTrack}`}
+          >
+            {facultyRestA.map((m) => (
+              <article key={m.fileName} className={localStyles.card} aria-label={m.name}>
+                <div className={localStyles.media}>
+                  <img className={localStyles.img} src={facultyImgSrcFromFile(m.fileName)} alt={m.name} loading="lazy" />
+                </div>
+                <div className={localStyles.meta}>
+                  <div className={`${localStyles.name} ${localStyles.facultyName}`}>{m.name}</div>
+                </div>
+              </article>
+            ))}
+          </ScrollableTrack>
+
+          {facultyRestB.length > 0 ? (
+            <ScrollableTrack
+              ariaLabel="Faculty carousel (more faculty 2)"
+              className={localStyles.trackWrap}
+              scrollerClassName={`${localStyles.track} ${localStyles.facultyTrack}`}
+            >
+              {facultyRestB.map((m) => (
+                <article key={m.fileName} className={localStyles.card} aria-label={m.name}>
+                  <div className={localStyles.media}>
+                    <img className={localStyles.img} src={facultyImgSrcFromFile(m.fileName)} alt={m.name} loading="lazy" />
+                  </div>
+                  <div className={localStyles.meta}>
+                    <div className={`${localStyles.name} ${localStyles.facultyName}`}>{m.name}</div>
+                  </div>
+                </article>
+              ))}
+            </ScrollableTrack>
+          ) : null}
 
           <h2 className={localStyles.subHeading}>Core Committee</h2>
-          <div className={localStyles.track} aria-label="Core committee carousel">
+          <ScrollableTrack
+            ariaLabel="Core committee carousel"
+            className={localStyles.trackWrap}
+            scrollerClassName={localStyles.track}
+          >
             {CORE_COMMITTEE.map((m) => (
               <article key={m.id} className={localStyles.card} aria-label={m.name}>
                 <div className={localStyles.media}>
@@ -132,7 +231,7 @@ export default function CommitteePage() {
                 </div>
               </article>
             ))}
-          </div>
+          </ScrollableTrack>
         </section>
       </main>
     </div>

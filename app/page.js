@@ -1,18 +1,10 @@
-import ClientEffects from './components/ClientEffects.jsx';
 import FestCards from './components/FestCards.jsx';
 
 export default function Page() {
   return (
-    <>
-      {/* Custom cursor */}
-      <div className="cursor" aria-hidden="true">
-        <div className="cursor__ring"></div>
-        <div className="cursor__dot"></div>
-      </div>
-
-      {/* Background */}
+    <div className="homeLight">
+      {/* Background (static only) */}
       <div className="bg bg--landing" aria-hidden="true">
-        <canvas className="sky" id="sky" aria-hidden="true"></canvas>
         <div className="bg__vignette"></div>
       </div>
 
@@ -267,13 +259,10 @@ export default function Page() {
         </div>
 
         <div className="footer__bottom">
-          <div>
-            © <span id="year"></span> TINT. All rights reserved.
-          </div>
+          <div>© {new Date().getFullYear()} TINT. All rights reserved.</div>
         </div>
       </footer>
 
-      <ClientEffects />
-    </>
+    </div>
   );
 }
