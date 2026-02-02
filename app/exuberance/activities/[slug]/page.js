@@ -49,11 +49,11 @@ export default function ActivityDetailsPage({ params }) {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
-          <Link href="/exuberance#schedule">Schedule</Link>
+          <Link href="/exuberance/schedule">Schedule</Link>
           <Link className={styles.navActive} href="/exuberance#awaits" aria-current="page">
             Activities
           </Link>
-          <Link href="/exuberance#sponsors">Sponsors</Link>
+          <Link href="/exuberance/sponsors">Sponsors</Link>
           <Link href="/exuberance/committee">Committee</Link>
           <Link href="/exuberance/gallery">Gallery</Link>
           <Link href="/exuberance/contact">Contact Us</Link>

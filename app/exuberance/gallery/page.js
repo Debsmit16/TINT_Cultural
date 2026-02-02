@@ -43,9 +43,9 @@ export default function ExuberanceGalleryPage() {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
-          <Link href="/exuberance#schedule">Schedule</Link>
+          <Link href="/exuberance/schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
-          <Link href="/exuberance#sponsors">Sponsors</Link>
+          <Link href="/exuberance/sponsors">Sponsors</Link>
           <Link href="/exuberance/committee">Committee</Link>
           <Link className={styles.navActive} href="/exuberance/gallery" aria-current="page">
             Gallery

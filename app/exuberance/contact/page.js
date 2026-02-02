@@ -42,9 +42,9 @@ export default function ContactUsPage() {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
-          <Link href="/exuberance#schedule">Schedule</Link>
+          <Link href="/exuberance/schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
-          <Link href="/exuberance#sponsors">Sponsors</Link>
+          <Link href="/exuberance/sponsors">Sponsors</Link>
           <Link href="/exuberance/committee">Committee</Link>
           <Link href="/exuberance/gallery">Gallery</Link>
           <Link className={styles.navActive} href="/exuberance/contact" aria-current="page">

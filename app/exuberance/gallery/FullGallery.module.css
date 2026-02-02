@@ -14,6 +14,7 @@
 .pageTitle{
   font-size:clamp(44px, 7vw, 96px);
   line-height:1.02;
+  font-family:"corpta-demo", "Cinzel", serif;
 }
 
 .pageTitleGlow{

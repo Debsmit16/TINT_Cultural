@@ -24,6 +24,12 @@
   font-display:swap;
 }
 
+@font-face{
+  font-family:"Blanka";
+  src:url("/fonts/blanka-free-font-er/BLANKA%20Font/Blanka-Regular.otf") format("opentype");
+  font-display:swap;
+}
+
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
@@ -100,8 +106,12 @@ img{max-width:100%; display:block}
 
 /* Background */
 .bg{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none}
+.bg--landing{
+  background:url("/background/landingpage_bg.avif") center/cover no-repeat;
+}
 .sky{position:absolute; inset:0; width:100%; height:100%; display:block}
 .bg__vignette{position:absolute; inset:0; background:radial-gradient(900px 600px at 50% 20%, transparent 40%, rgba(0,0,0,.70) 85%)}
+.bg--landing .bg__vignette{background:none}
 
 /* Layout */
 .topbar{
@@ -140,6 +150,19 @@ img{max-width:100%; display:block}
   padding:54px 20px 26px;
 }
 .hero__inner{width:min(1100px, 92vw); max-width:1100px; text-align:center}
+.hero__logo{
+  width:clamp(84px, 14vw, 150px);
+  height:auto;
+  margin:0 auto 14px;
+}
+
+html.js .hero__logo{opacity:0}
+html.js .reveal.is-visible .hero__logo{animation:heroLogoFade .85s ease forwards}
+
+@keyframes heroLogoFade{
+  from{opacity:0}
+  to{opacity:1}
+}
 .title{
   margin:0;
   font-family:"Cinzel", serif;
@@ -577,4 +600,6 @@ html.js .reveal.is-visible{opacity:1; transform:translateY(0); filter:blur(0); t
   body{cursor:auto}
   .marquee__row--a .marquee__group, .marquee__row--b .marquee__group{animation:none}
   .reveal{opacity:1; transform:none; filter:none}
+  html.js .hero__logo{opacity:1}
+  html.js .reveal.is-visible .hero__logo{animation:none}
 }

@@ -71,9 +71,9 @@ export default function CommitteePage() {
         </Link>
 
         <nav className={styles.nav} aria-label="Exuberance navigation">
-          <Link href="/exuberance#schedule">Schedule</Link>
+          <Link href="/exuberance/schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
-          <Link href="/exuberance#sponsors">Sponsors</Link>
+          <Link href="/exuberance/sponsors">Sponsors</Link>
           <Link className={styles.navActive} href="/exuberance/committee" aria-current="page">
             Committee
           </Link>
