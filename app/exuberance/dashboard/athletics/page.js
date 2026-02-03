@@ -21,7 +21,6 @@ const ATHLETICS_EVENTS = [
   { id: 'shotput', name: 'Shot Put', individual: true },
   { id: 'relay', name: 'Relay Race (4x100m)', individual: false, teamSize: 4 },
   { id: 'hit_wicket', name: 'Hit the Wicket (Girls Only)', individual: true, girlsOnly: true },
-  { id: 'tug_of_war', name: 'Tug of War', individual: false, teamSize: 8 },
 ];
 
 export default function AthleticsRegistration() {
@@ -166,7 +165,6 @@ export default function AthleticsRegistration() {
           'shotput': 'shotput',
           'relay': 'relay',
           'hit_wicket': 'hit_wicket',
-          'tug_of_war': 'tug_of_war',
         };
         return mapping[eventId] || eventId;
       };

@@ -16,55 +16,51 @@ export default function ExuberancePage() {
     athletics: [
       {
         title: '100 metres',
-        img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/100%20metres.jpg',
       },
       {
         title: '400 metres',
-        img: 'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/400%20metres.jpg',
       },
       {
         title: 'Shotput',
-        img: 'https://images.unsplash.com/photo-1598346762291-aee88549193f?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/shotput.jpg',
       },
       {
         title: 'Relay Race',
-        img: 'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/relay%20race.jpg',
       },
       {
         title: 'Hit the Wicket',
-        img: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1600&q=80',
-      },
-      {
-        title: 'Tug of war',
-        img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/hit%20the%20wicket.jpg',
       },
     ],
     outdoor: [
       {
         title: 'Cricket',
-        img: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/cricket.jpg',
       },
       {
         title: 'Football',
-        img: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/football.jpg',
       },
       {
         title: 'Badminton',
-        img: 'https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/badminton.jpg',
       },
     ],
     indoor: [
       {
         title: 'Chess',
-        img: 'https://images.unsplash.com/photo-1523875194681-bedd468c58bf?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/chess.jpg',
       },
       {
         title: 'Carrom',
-        img: 'https://images.unsplash.com/photo-1611947330066-1b975a4b7f74?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/carrom.jpg',
       },
       {
         title: 'Table Tennis',
-        img: 'https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1600&q=80',
+        img: '/activities/table%20tennis.jpg',
       },
     ],
   };

@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import styles from './FestCards.module.css';
 
@@ -15,14 +13,14 @@ const FESTS = [
     title: 'Prabuddha',
     subtitle: 'Annual Tech Fest',
     image:
-      'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&q=80',
+      '/activities/coming%20soon.jpg',
     desc: 'Hackathons, prototypes, and late-night breakthroughs — creativity engineered into reality.',
   },
   {
     title: 'Yagvik',
     subtitle: 'Annual Cultural Fest',
     image:
-      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80',
+      '/activities/coming%20soon.jpg',
     desc: 'Music, lights, and timeless performances — curated chaos that feels elegant.',
   },
 ];

@@ -30,7 +30,7 @@ const EVENT_CARDS = [
     id: 'athletics',
     title: 'Athletics Events',
     subtitle: 'Track & Field',
-    description: '100m, 400m, Shot put, Relay, Hit the Wicket, Tug of War.',
+    description: '100m, 400m, Shot put, Relay, Hit the Wicket.',
     date: '5th Feb 2026',
     venue: 'NKDA Ground, Newtown',
     limit: 'Max 2 events per athlete',

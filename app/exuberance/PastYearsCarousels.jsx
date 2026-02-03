@@ -3,6 +3,8 @@
 import { useMemo } from 'react';
 
 export default function PastYearsCarousels({ className }) {
+  const COMING_SOON_IMG = '/activities/coming%20soon.jpg';
+
   const years = useMemo(
     () => [
       {
@@ -13,17 +15,17 @@ export default function PastYearsCarousels({ className }) {
           {
             title: 'Opening Ceremony',
             caption: 'Flags up. Heartbeat louder.',
-            img: 'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
           {
             title: 'Track & Field',
             caption: 'Sprint lines. Finish-line roar.',
-            img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
           {
             title: 'Team Battles',
             caption: 'One squad. One goal.',
-            img: 'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
         ],
       },
@@ -35,17 +37,17 @@ export default function PastYearsCarousels({ className }) {
           {
             title: 'Arena Nights',
             caption: 'Lights, chants, momentum.',
-            img: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
           {
             title: 'Basketball',
             caption: 'Quick hands. Quick hearts.',
-            img: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
           {
             title: 'Victory Moments',
             caption: 'Win with grace. Lose with pride.',
-            img: 'https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
         ],
       },
@@ -57,17 +59,17 @@ export default function PastYearsCarousels({ className }) {
           {
             title: 'Football Clash',
             caption: 'Pressure, passes, precision.',
-            img: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
           {
             title: 'Relay Spirit',
             caption: 'Trust is the fastest lane.',
-            img: 'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
           {
             title: 'Finals Night',
             caption: 'The last whistle. The loudest cheer.',
-            img: 'https://images.unsplash.com/photo-1526676033148-46f5f6f7b24a?auto=format&fit=crop&w=1600&q=80',
+            img: COMING_SOON_IMG,
           },
         ],
       },
