@@ -108,21 +108,23 @@
 .btn:hover{background-color:#2a8ab8;}
 
 @media (max-width: 700px){
-  .wrap{height:420px;}
+  /* Mobile: stack cards vertically instead of overlapping */
+  .wrap{height:auto;}
   .container{
-    width:92vw;
-    left:50%;
-    transform:translateX(-50%);
-  }
-}
-
-@media (max-width: 520px){
-  .wrap{height:470px;}
-  .container{
+    position:relative;
+    top:auto;
+    left:auto;
+    transform:none;
+    width:100%;
     height:auto;
-    padding:20px 0;
-    align-items:flex-start;
+    padding:16px 14px;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:16px;
   }
-  .card{width:260px; height:295px;}
-  .card:not(:first-child){margin-left:-46px;}
+  .card{width:100%; height:auto;}
+  .card:not(:first-child){margin-left:0;}
+  .card:hover{transform:none;}
+  .card:hover ~ .card{transform:none;}
 }

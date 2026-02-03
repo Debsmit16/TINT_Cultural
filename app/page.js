@@ -1,4 +1,23 @@
 import FestCards from './components/FestCards.jsx';
+import { EXUBERANCE_GALLERY_FILES } from './exuberance/galleryFiles.js';
+
+function fileNameToAlt(fileName) {
+  const base = fileName.replace(/\.[^/.]+$/, '');
+  return base
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function pickFiles(startIndex, count) {
+  const files = EXUBERANCE_GALLERY_FILES ?? [];
+  if (files.length === 0) return [];
+  return Array.from({ length: count }, (_, i) => files[(startIndex + i) % files.length]);
+}
+
+function toPhotoSrc(fileName) {
+  return `/photos/photo_webp/Webp/${encodeURIComponent(fileName)}`;
+}
 
 export default function Page() {
   return (
@@ -78,135 +97,37 @@ export default function Page() {
           <div className="marquee reveal" aria-label="Scrolling photo gallery">
             <div className="marquee__row marquee__row--a" data-marquee>
               <div className="marquee__group">
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1520975693411-4a41c3fba63c?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1520975958225-7d11299b6a23?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=80"
-                />
+                {pickFiles(0, 6).map((fileName) => (
+                  <img
+                    key={fileName}
+                    alt={fileNameToAlt(fileName) || 'Gallery photo'}
+                    loading="lazy"
+                    src={toPhotoSrc(fileName)}
+                  />
+                ))}
               </div>
               <div className="marquee__group" aria-hidden="true">
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1520975693411-4a41c3fba63c?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1520975958225-7d11299b6a23?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=80"
-                />
+                {pickFiles(0, 6).map((fileName) => (
+                  <img key={`dup-a-${fileName}`} alt="" loading="lazy" src={toPhotoSrc(fileName)} />
+                ))}
               </div>
             </div>
 
             <div className="marquee__row marquee__row--b" data-marquee>
               <div className="marquee__group">
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt="Gallery photo"
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-                />
+                {pickFiles(6, 6).map((fileName) => (
+                  <img
+                    key={fileName}
+                    alt={fileNameToAlt(fileName) || 'Gallery photo'}
+                    loading="lazy"
+                    src={toPhotoSrc(fileName)}
+                  />
+                ))}
               </div>
               <div className="marquee__group" aria-hidden="true">
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
-                />
-                <img
-                  alt=""
-                  loading="lazy"
-                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-                />
+                {pickFiles(6, 6).map((fileName) => (
+                  <img key={`dup-b-${fileName}`} alt="" loading="lazy" src={toPhotoSrc(fileName)} />
+                ))}
               </div>
             </div>
           </div>
