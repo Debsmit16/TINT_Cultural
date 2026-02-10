@@ -32,7 +32,7 @@ export default function ExuberanceGalleryPage() {
           </span>
         </Link>
 
-        <nav className={styles.nav} aria-label="Exuberance navigation">
+        <nav className={`${styles.nav} ${styles.subpageNav}`} aria-label="Exuberance navigation">
           <Link href="/exuberance/schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
           <Link href="/exuberance/sponsors">Sponsors</Link>

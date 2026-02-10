@@ -44,7 +44,7 @@ export default function SchedulePage() {
           </span>
         </Link>
 
-        <nav className={styles.nav} aria-label="Exuberance navigation">
+        <nav className={`${styles.nav} ${styles.subpageNav}`} aria-label="Exuberance navigation">
           <Link className={styles.navActive} href="/exuberance/schedule" aria-current="page">
             Schedule
           </Link>

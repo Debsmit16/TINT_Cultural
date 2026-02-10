@@ -95,7 +95,7 @@ export default function ContactTeams() {
   const [selected, setSelected] = useState('core');
 
   const data = useMemo(() => {
-    const core = [CORE_TEAM];
+    const core = CORE_TEAM.map((person) => [person]);
 
     const tech = TECH_TEAM.map((person) => [person]);
     const sponsor = SPONSOR_TEAM.map((person) => [person]);

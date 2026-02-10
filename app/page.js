@@ -1,4 +1,5 @@
 import FestCards from './components/FestCards.jsx';
+import PwaInstallSection from './components/PwaInstallSection.jsx';
 import { EXUBERANCE_GALLERY_FILES } from './exuberance/galleryFiles.js';
 
 function fileNameToAlt(fileName) {
@@ -132,6 +133,8 @@ export default function Page() {
             </div>
           </div>
         </section>
+
+        <PwaInstallSection />
       </main>
 
       <footer className="footer">

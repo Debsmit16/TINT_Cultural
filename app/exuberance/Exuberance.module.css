@@ -207,6 +207,8 @@
   }
   .nav::-webkit-scrollbar{display:none}
 
+  .subpageNav{display:none;}
+
   .navDesktopOnly{display:none;}
   .navMobileOnly{display:flex;}
 }

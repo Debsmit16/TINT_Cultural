@@ -34,7 +34,7 @@ export default function SponsorsPage() {
           </span>
         </Link>
 
-        <nav className={styles.nav} aria-label="Exuberance navigation">
+        <nav className={`${styles.nav} ${styles.subpageNav}`} aria-label="Exuberance navigation">
           <Link href="/exuberance/schedule">Schedule</Link>
           <Link href="/exuberance#awaits">Activities</Link>
           <Link className={styles.navActive} href="/exuberance/sponsors" aria-current="page">
