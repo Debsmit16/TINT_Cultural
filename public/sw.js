@@ -61,8 +61,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       (async () => {
         try {
-          // Bypass the HTTP cache as well.
-          return await fetch(request, { cache: 'no-store' });
+          return await fetch(request);
         } catch {
           const cache = await caches.open(CACHE);
           return (await cache.match('/offline.html'));

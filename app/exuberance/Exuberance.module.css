@@ -41,6 +41,16 @@
     linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
 }
 
+.bgMain{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.58) 100%),
+    url("/background/mainpage_bg.jfif") center/cover no-repeat;
+}
+
 .nav{
   flex:1;
   display:flex;

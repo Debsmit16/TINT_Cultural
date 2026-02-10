@@ -68,6 +68,7 @@ export default function ExuberancePage() {
 
   return (
     <div className={styles.wrap}>
+      <div className={styles.bgMain} aria-hidden="true" />
       {/* Lightweight static background */}
       <div className={styles.staticBg} aria-hidden="true" />
 
@@ -245,7 +246,7 @@ export default function ExuberancePage() {
               </div>
               <div className={styles.joinMeta}>
                 <div className={styles.joinLabel}>Date</div>
-                <div className={styles.joinValue}>5, 6, 7 Feb 2026</div>
+                <div className={styles.joinValue}>12, 13 Feb 2026</div>
               </div>
             </div>
 

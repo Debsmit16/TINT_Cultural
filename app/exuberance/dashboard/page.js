@@ -13,7 +13,7 @@ const EVENT_CARDS = [
     title: 'Outdoor Events',
     subtitle: 'Cricket & Football',
     description: 'Team sports at NKDA Ground. Cricket (Boys/Girls) and Football (Boys).',
-    date: '6th & 7th Feb 2026',
+    date: '13th Feb 2026',
     venue: 'NKDA Ground, Newtown',
     limit: 'Max 1 outdoor game per athlete',
     icon: (
@@ -31,7 +31,7 @@ const EVENT_CARDS = [
     title: 'Athletics Events',
     subtitle: 'Track & Field',
     description: '100m, 400m, Shot put, Relay, Hit the Wicket.',
-    date: '5th Feb 2026',
+    date: '12th Feb 2026',
     venue: 'NKDA Ground, Newtown',
     limit: 'Max 2 events per athlete',
     icon: (
@@ -48,7 +48,7 @@ const EVENT_CARDS = [
     title: 'Indoor Events',
     subtitle: 'Mind & Precision Sports',
     description: 'Chess, Carrom, Table Tennis, Badminton (Girls only).',
-    date: '5th & 6th Feb 2026',
+    date: '12th & 13th Feb 2026',
     venue: 'College Premises',
     limit: 'Max 2 indoor games per athlete',
     icon: (
@@ -292,7 +292,7 @@ export default function DashboardPage() {
 
                     <div className={styles.idCardFooter}>
                       <p>Techno India, Salt Lake</p>
-                      <p>5-7 Feb 2026</p>
+                      <p>12-13 Feb 2026</p>
                     </div>
                   </div>
 

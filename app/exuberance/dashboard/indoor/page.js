@@ -242,7 +242,7 @@ export default function IndoorRegistration() {
         <div className={styles.formContainer}>
           <div className={styles.formHeader}>
             <h1 className={styles.formTitle}>Indoor Events Registration</h1>
-            <p className={styles.formSubtitle}>Chess, Carrom, Table Tennis, Badminton — 5th & 6th Feb 2026</p>
+            <p className={styles.formSubtitle}>Chess, Carrom, Table Tennis, Badminton — 12th & 13th Feb 2026</p>
           </div>
 
           <div className={styles.infoBox}>

@@ -217,7 +217,7 @@ export default function OutdoorRegistration() {
         <div className={styles.formContainer}>
           <div className={styles.formHeader}>
             <h1 className={styles.formTitle}>Outdoor Events Registration</h1>
-            <p className={styles.formSubtitle}>Cricket & Football — 6th & 7th Feb 2026</p>
+            <p className={styles.formSubtitle}>Cricket & Football — 13th Feb 2026</p>
           </div>
 
           <div className={styles.infoBox}>

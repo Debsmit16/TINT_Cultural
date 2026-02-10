@@ -250,7 +250,7 @@ export default function AthleticsRegistration() {
         <div className={styles.formContainer}>
           <div className={styles.formHeader}>
             <h1 className={styles.formTitle}>Athletics Events Registration</h1>
-            <p className={styles.formSubtitle}>Track & Field — 5th Feb 2026</p>
+            <p className={styles.formSubtitle}>Track & Field — 12th Feb 2026</p>
           </div>
 
           <div className={styles.infoBox}>
