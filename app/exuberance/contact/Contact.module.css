@@ -12,7 +12,7 @@
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  z-index:-2;
+  z-index:0;
 }
 
 .bg::after{
@@ -20,7 +20,7 @@
   position:absolute;
   inset:0;
   background:linear-gradient(180deg, rgba(0,0,0,.68), rgba(0,0,0,.62));
-  z-index:0;
+  z-index:1;
 }
 
 .main{
@@ -29,6 +29,8 @@
   align-items:center;
   justify-content:center;
   padding:110px 0 60px;
+  position:relative;
+  z-index:1;
 }
 
 .container{
@@ -105,6 +107,17 @@
     grid-template-columns:repeat(2, minmax(0, 1fr));
     align-items:stretch;
     justify-items:stretch;
+  }
+
+  .carouselsCore{
+    grid-template-columns:1fr;
+    justify-items:center;
+  }
+
+  .carouselsCore .carouselRow{
+    grid-column:1 / -1;
+    justify-self:center;
+    width:min(520px, 100%);
   }
 
   .carouselRow{

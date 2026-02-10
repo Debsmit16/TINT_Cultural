@@ -2,12 +2,67 @@
 
 import { useMemo, useState } from 'react';
 import styles from './Contact.module.css';
-import { CORE_COMMITTEE } from '../committee/committeeData.js';
 
 function imgSrcFromFile(fileName) {
   if (!fileName) return 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80';
+  if (fileName.startsWith('/committee/')) {
+    const base = fileName.slice('/committee/'.length);
+    return `/committee/${encodeURIComponent(base)}`;
+  }
+  if (fileName.startsWith('/')) return fileName;
   return `/photos/photo_webp/Webp/${encodeURIComponent(fileName)}`;
 }
+
+const TECH_TEAM = [
+  {
+    id: 'tech-ayushman-das',
+    name: 'Ayushman Das',
+    imgFile: '/committee/Ayushman Das.jpeg',
+    linkedin: 'https://www.linkedin.com/in/ayushman-das-ba6272320?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    instagram: 'https://www.instagram.com/_ayushman04._?igsh=MTBzY3QwenpoZ2hk',
+  },
+  {
+    id: 'tech-debsmit-ghosh',
+    name: 'Debsmit Ghosh',
+    imgFile: '/committee/DEBSMIT GHOSH.jpeg',
+    linkedin: 'https://www.linkedin.com/in/debsmit-ghosh-23267227b?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    instagram: 'https://www.instagram.com/_.iam_debzz._?igsh=MWt3YjM5azVuamswZg==',
+  },
+];
+
+const CORE_TEAM = [
+  {
+    id: 'core-karan-raj-singh',
+    name: 'Karan Raj Singh',
+    imgFile: '/committee/KARAN RAJ SINGH.jpeg',
+    linkedin: 'https://www.linkedin.com/',
+    instagram: 'https://www.instagram.com/',
+  },
+  {
+    id: 'core-sobhon-roy',
+    name: 'Sobhon Roy',
+    imgFile: '/committee/SOBHAN ROY.png',
+    linkedin: 'https://www.linkedin.com/',
+    instagram: 'https://www.instagram.com/',
+  },
+];
+
+const SPONSOR_TEAM = [
+  {
+    id: 'sponsor-somnath-mukherjee',
+    name: 'Somnath Mukherjee',
+    imgFile: '/committee/Somnath Mukherjee.jpeg',
+    linkedin: 'https://www.linkedin.com/',
+    instagram: 'https://www.instagram.com/',
+  },
+  {
+    id: 'sponsor-santosh-kumar-singh',
+    name: 'Santosh Kumar Singh',
+    imgFile: '/committee/Santosh Kumar Singh.jpeg',
+    linkedin: 'https://www.linkedin.com/',
+    instagram: 'https://www.instagram.com/',
+  },
+];
 
 function LinkedInIcon() {
   return (
@@ -36,26 +91,14 @@ function InstagramIcon() {
   );
 }
 
-function buildPlaceholders(prefix) {
-  const label = prefix === 'tech' ? 'Tech' : 'Sponsor';
-  return Array.from({ length: 3 }, (_, i) => ({
-    id: `${prefix}-${i + 1}`,
-    name: `${label} Member ${String(i + 1).padStart(2, '0')}`,
-    imgFile: null,
-    linkedin: 'https://www.linkedin.com/',
-    instagram: 'https://www.instagram.com/',
-  }));
-}
-
 export default function ContactTeams() {
   const [selected, setSelected] = useState('core');
 
   const data = useMemo(() => {
-    const coreThree = CORE_COMMITTEE.slice(0, 3);
-    const core = coreThree.map((person) => [person]);
+    const core = [CORE_TEAM];
 
-    const tech = buildPlaceholders('tech').map((person) => [person]);
-    const sponsor = buildPlaceholders('sponsor').map((person) => [person]);
+    const tech = TECH_TEAM.map((person) => [person]);
+    const sponsor = SPONSOR_TEAM.map((person) => [person]);
 
     return {
       core: { label: 'Core Committee', rows: core },
@@ -92,7 +135,7 @@ export default function ContactTeams() {
         </button>
       </div>
 
-      <div className={styles.carousels}>
+      <div className={`${styles.carousels} ${selected === 'core' ? styles.carouselsCore : ''}`}>
         {active.rows.map((row, rowIndex) => (
           <div key={`${selected}-row-${rowIndex}`} className={styles.carouselRow}>
             <div className={styles.track} role="group" aria-roledescription="carousel">

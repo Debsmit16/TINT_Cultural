@@ -13,7 +13,7 @@ export const metadata = {
     title: 'TINTWeb',
   },
   icons: {
-    icon: [{ url: '/icons/icon.svg', type: 'image/svg+xml' }],
+    icon: [{ url: '/logos/tint_logo.png', type: 'image/png' }],
   },
 };
 

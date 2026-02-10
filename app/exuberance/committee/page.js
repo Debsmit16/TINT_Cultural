@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styles from '../Exuberance.module.css';
 import localStyles from './Committee.module.css';
-import { CORE_COMMITTEE } from './committeeData.js';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import fs from 'fs';
 import path from 'path';
@@ -11,14 +10,14 @@ export const metadata = {
   description: 'Committee — Exuberance.',
 };
 
-function imgSrcFromFile(fileName) {
-  if (!fileName) return 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80';
-  return `/photos/photo_webp/Webp/${encodeURIComponent(fileName)}`;
-}
-
 function facultyImgSrcFromFile(fileName) {
   if (!fileName) return 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80';
   return `/faculty/${encodeURIComponent(fileName)}`;
+}
+
+function committeeImgSrcFromFile(fileName) {
+  if (!fileName) return 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80';
+  return `/committee/${encodeURIComponent(fileName)}`;
 }
 
 function displayNameFromFileName(fileName) {
@@ -65,6 +64,25 @@ function getFacultyFromPublicDir() {
   return { featured, rest };
 }
 
+function getCommitteeFromPublicDir() {
+  const dir = path.join(process.cwd(), 'public', 'committee');
+  let files = [];
+  try {
+    files = fs.readdirSync(dir);
+  } catch {
+    files = [];
+  }
+
+  const allowed = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.heic']);
+  return files
+    .filter((f) => allowed.has(path.extname(f).toLowerCase()))
+    .map((fileName) => ({
+      fileName,
+      name: displayNameFromFileName(fileName),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 function LinkedInIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -101,12 +119,14 @@ function InstagramIcon() {
 
 export default function CommitteePage() {
   const { featured: facultyFeatured, rest: facultyRest } = getFacultyFromPublicDir();
+  const committee = getCommitteeFromPublicDir();
   const splitAt = Math.ceil(facultyRest.length / 2);
   const facultyRestA = facultyRest.slice(0, splitAt);
   const facultyRestB = facultyRest.slice(splitAt);
 
   return (
     <div className={localStyles.wrap}>
+      <div className={localStyles.bgSpecial} aria-hidden="true" />
       {/* Lightweight static background */}
       <div className={styles.staticBg} aria-hidden="true" />
 
@@ -206,25 +226,25 @@ export default function CommitteePage() {
             </ScrollableTrack>
           ) : null}
 
-          <h2 className={localStyles.subHeading}>Core Committee</h2>
+          <h2 className={localStyles.subHeading}>Student Committee</h2>
           <ScrollableTrack
             ariaLabel="Core committee carousel"
             className={localStyles.trackWrap}
             scrollerClassName={localStyles.track}
           >
-            {CORE_COMMITTEE.map((m) => (
-              <article key={m.id} className={localStyles.card} aria-label={m.name}>
+            {committee.map((m) => (
+              <article key={m.fileName} className={localStyles.card} aria-label={m.name}>
                 <div className={localStyles.media}>
-                  <img className={localStyles.img} src={imgSrcFromFile(m.imgFile)} alt={m.name} loading="lazy" />
+                  <img className={localStyles.img} src={committeeImgSrcFromFile(m.fileName)} alt={m.name} loading="lazy" />
                 </div>
                 <div className={localStyles.meta}>
                   <div className={localStyles.name}>{m.name}</div>
-                  <div className={localStyles.role}>Core Committee</div>
+                  <div className={localStyles.role}>Student Committee</div>
                   <div className={localStyles.social} aria-label="Social links">
-                    <a href={m.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                       <LinkedInIcon />
                     </a>
-                    <a href={m.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+                    <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
                       <InstagramIcon />
                     </a>
                   </div>

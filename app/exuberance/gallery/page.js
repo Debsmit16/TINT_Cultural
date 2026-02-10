@@ -12,6 +12,7 @@ export const metadata = {
 export default function ExuberanceGalleryPage() {
   return (
     <div className={styles.wrap}>
+      <div className={fullStyles.bgSpecial} aria-hidden="true" />
       {/* Lightweight static background */}
       <div className={styles.staticBg} aria-hidden="true" />
 

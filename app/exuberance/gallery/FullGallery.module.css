@@ -3,6 +3,17 @@
   margin:18px auto 0;
 }
 
+.bgSpecial{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 50% 105%, rgba(0,220,255,.18), rgba(0,0,0,0) 65%),
+    linear-gradient(180deg, rgba(0,0,0,.40) 0%, rgba(7,10,20,.46) 55%, rgba(0,0,0,.58) 100%),
+    url("/background/gallery_bg.avif") center/cover no-repeat;
+}
+
 .pageSection{
   padding-top:20px;
 }

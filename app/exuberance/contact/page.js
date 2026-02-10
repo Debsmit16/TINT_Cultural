@@ -11,6 +11,7 @@ export const metadata = {
 export default function ContactUsPage() {
   return (
     <div className={localStyles.wrap}>
+      <div className={localStyles.bg} aria-hidden="true" />
       {/* Lightweight static background */}
       <div className={styles.staticBg} aria-hidden="true" />
 

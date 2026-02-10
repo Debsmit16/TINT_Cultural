@@ -2,7 +2,7 @@
 
 const CACHE = 'tintweb-v5';
 // Important: do NOT precache '/' (HTML) to avoid getting stuck on stale UI after updates.
-const CORE = ['/offline.html', '/manifest.webmanifest', '/icons/icon.svg'];
+const CORE = ['/offline.html', '/manifest.webmanifest', '/logos/tint_logo.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -36,7 +36,11 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
 
   // Cache-first for Next static assets and public assets
-  const isStatic = url.pathname.startsWith('/_next/static/') || url.pathname.startsWith('/assets/') || url.pathname.startsWith('/icons/');
+  const isStatic =
+    url.pathname.startsWith('/_next/static/') ||
+    url.pathname.startsWith('/assets/') ||
+    url.pathname.startsWith('/icons/') ||
+    url.pathname.startsWith('/logos/');
 
   if (isStatic) {
     event.respondWith(
