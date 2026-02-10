@@ -44,22 +44,39 @@ function getFacultyFromPublicDir() {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const normalize = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-  const featuredNames = [
-    'Dr. Ayan Chakrabarty',
-    'Dr. Soma Chatterjee Ghosh',
-    'Dr. Swagata Paul',
-  ].map(normalize);
+  const featuredNames = ['dr ayan', 'dr soma chatterjee ghosh', 'dr swagata'].map(normalize);
+  const priorityRest = ['amlendu', 'taposi', 'rajkumar', 'joy chattaraj', 'srijan dutta', 'saubhik', 'pradipt', 'rajat'].map(
+    normalize
+  );
 
   const featured = [];
-  const rest = [];
+  const unfeatured = [];
   for (const it of items) {
     const n = normalize(it.name);
-    if (featuredNames.includes(n)) featured.push(it);
-    else rest.push(it);
+    if (featuredNames.some((p) => n.includes(p))) featured.push(it);
+    else unfeatured.push(it);
   }
 
   // Keep featured in the exact requested order
-  featured.sort((a, b) => featuredNames.indexOf(normalize(a.name)) - featuredNames.indexOf(normalize(b.name)));
+  featured.sort((a, b) => {
+    const aIdx = featuredNames.findIndex((p) => normalize(a.name).includes(p));
+    const bIdx = featuredNames.findIndex((p) => normalize(b.name).includes(p));
+    return aIdx - bIdx;
+  });
+
+  const rest = unfeatured
+    .slice()
+    .sort((a, b) => {
+      const an = normalize(a.name);
+      const bn = normalize(b.name);
+      const aP = priorityRest.findIndex((p) => an.includes(p));
+      const bP = priorityRest.findIndex((p) => bn.includes(p));
+
+      const aRank = aP === -1 ? Number.POSITIVE_INFINITY : aP;
+      const bRank = bP === -1 ? Number.POSITIVE_INFINITY : bP;
+      if (aRank !== bRank) return aRank - bRank;
+      return a.name.localeCompare(b.name);
+    });
 
   return { featured, rest };
 }

@@ -95,6 +95,19 @@ export default function ExuberancePage() {
               <div className={styles.heroCollege}>TECHNO INTERNATIONAL NEW TOWN</div>
             </div>
 
+            <section className={styles.posterSection} aria-label="Exuberance poster">
+              <Link
+                className={styles.posterLink}
+                href="/exuberance/matches"
+                aria-label="Open fixtures and find your match"
+              >
+                <picture>
+                  <source media="(max-width: 640px)" srcSet="/posters/mobile.png" />
+                  <img className={styles.posterImg} src="/posters/desktop.png" alt="Exuberance poster" loading="eager" />
+                </picture>
+              </Link>
+            </section>
+
             <div className={styles.heroWatermark} aria-hidden="true">
               <img src="/logos/exuberance_logo.webp" alt="" />
             </div>

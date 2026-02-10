@@ -24,6 +24,11 @@ export const slugFromEventTitle = (title) => {
     .replace(/^-|-$/g, '');
 };
 
+const ATHLETICS_HEADS = [
+  { name: 'Anushka Das', extra: 'Contact: 8697590318' },
+  { name: 'Abhinandan Kumar', extra: 'Contact: 7324926738' },
+];
+
 export const EVENT_DETAILS = {
   cricket: {
     title: 'Cricket',
@@ -36,14 +41,17 @@ export const EVENT_DETAILS = {
       'No bye runs will be given, but overthrow runs and wide runs are allowed.',
       'LBW out is not considered.',
       'All matches will be of 5 overs (bowling restrictions: 2+1+1+1).',
-      "If possible, semi-final and final matches will be of 6 overs (2+2+1+1).",
+      'If possible, semi-final and final matches will be of 6 overs (2+2+1+1).',
       'Only one bouncer is allowed per over.',
       "The umpire's decision will be considered final. Any type of misbehavior with umpires or committee members may cause penalty runs for the team accordingly.",
       'ID proof (ID card/Library card/Money receipt) is mandatory.',
       'You are requested to reach sharp at 9:00 AM.',
       'Every team must report 30 minutes earlier than their scheduled match. If any team fails to report on time, overs may be reduced for that team, and the opponent team may get a walkover.',
     ],
-    eventHeads: [],
+    eventHeads: [
+      { name: 'Karan Raj Singh', extra: 'Contact: 7761977030' },
+      { name: 'Shovan Mondal', extra: 'Contact: 8274058833' },
+    ],
   },
   chess: {
     title: 'Chess',
@@ -61,7 +69,10 @@ export const EVENT_DETAILS = {
       'ID proof (like an ID card, library card, or receipt) is required.',
       'Please arrive on time.',
     ],
-    eventHeads: [],
+    eventHeads: [
+      { name: 'Debjyoti Sarkar', extra: 'Contact: 6001772064' },
+      { name: 'Debsmit Ghosh', extra: 'Contact: 9432150953' },
+    ],
   },
   'table-tennis': {
     title: 'Table Tennis',
@@ -79,7 +90,10 @@ export const EVENT_DETAILS = {
       'ID proof (ID card/Library card/money receipt) is mandatory.',
       'You are requested to reach sharp at 9:30 AM.',
     ],
-    eventHeads: [],
+    eventHeads: [
+      { name: 'Ujan Das', extra: 'Contact: 8420826886' },
+      { name: 'Md Basit', extra: 'Contact: 6201100414' },
+    ],
   },
   badminton: {
     title: 'Badminton',
@@ -97,7 +111,10 @@ export const EVENT_DETAILS = {
       'Equipment & Conduct: Players are expected to bring their own rackets; shuttles will be provided by the organizers. Proper sports attire and non-marking shoes are mandatory.',
       'ID Verification: College ID card/Library card/Money receipt must be presented before the match. Entry without valid ID will not be permitted.',
     ],
-    eventHeads: [],
+    eventHeads: [
+      { name: 'Srijita Sarkar', extra: 'Contact: 8609018595' },
+      { name: 'Sayan Seth', extra: 'Contact: 6290436340' },
+    ],
   },
   carrom: {
     title: 'Carrom',
@@ -113,9 +130,8 @@ export const EVENT_DETAILS = {
       'Board Rules: At first two boards will be played without queen. If the results of the two boards are tied then the third board will be played with Queen & Cover Rule.',
     ],
     eventHeads: [
-      { name: 'Pritam Basak', extra: 'CSE-DS (4th Year) — Contact: 8910254870' },
-      { name: 'Himagna Mallik', extra: 'AIML (4th Year) — Contact: 9732132009' },
-      { name: 'Srimoyee Pal', extra: 'CSE (3rd Year) — Contact: 8584018858' },
+      { name: 'Pritam Basak', extra: 'Contact: 8910254870' },
+      { name: 'Himagna Mallik', extra: 'Contact: 9732132009' },
     ],
   },
   football: {
@@ -134,7 +150,10 @@ export const EVENT_DETAILS = {
       'Matches will start from 9:30 AM onwards.',
       "A hard copy of the team list (signed by respective department's HOD/sports faculty member) should be submitted on the field at the time of verification (mandatory).",
     ],
-    eventHeads: [],
+    eventHeads: [
+      { name: 'Santosh Kumar Singh', extra: 'Contact: 7980464129' },
+      { name: 'Souvik Banerjee', extra: 'Contact: 6295465320' },
+    ],
   },
   'hit-the-wicket': {
     title: 'Hit the Wicket',
@@ -157,12 +176,11 @@ export const EVENT_DETAILS = {
       'Winner: Highest score. Runner-up: Second highest score.',
       'Tie-breaker: Player with fewer attempts ranks higher. If still tied, one extra throw will decide the position.',
     ],
-    eventHeads: [],
+    eventHeads: ATHLETICS_HEADS,
   },
 
-  // Placeholder pages for athletics items not specified yet.
-  '100-metres': { title: '100 metres', rules: [], eventHeads: [] },
-  '400-metres': { title: '400 metres', rules: [], eventHeads: [] },
-  shotput: { title: 'Shotput', rules: [], eventHeads: [] },
-  'relay-race': { title: 'Relay Race', rules: [], eventHeads: [] },
+  '100-metres': { title: '100 metres', rules: [], eventHeads: ATHLETICS_HEADS },
+  '400-metres': { title: '400 metres', rules: [], eventHeads: ATHLETICS_HEADS },
+  shotput: { title: 'Shotput', rules: [], eventHeads: ATHLETICS_HEADS },
+  'relay-race': { title: 'Relay Race', rules: [], eventHeads: ATHLETICS_HEADS },
 };

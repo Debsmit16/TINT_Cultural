@@ -7,6 +7,24 @@ export const metadata = {
   description: 'Sponsors — Exuberance.',
 };
 
+const FOOD_SPONSORS = [
+  {
+    src: '/logos/sponsors/Food express plaza_ Food sponcer.jpg',
+    alt: 'Food Express Plaza',
+  },
+  {
+    src: '/logos/sponsors/Royal Biriyani_Food Sponcer.jpg',
+    alt: 'Royal Biriyani',
+  },
+];
+
+const MEDICAL_PARTNERS = [
+  {
+    src: '/logos/sponsors/Universal Educare_ Medical Partner.jpg',
+    alt: 'Universal Educare',
+  },
+];
+
 export default function SponsorsPage() {
   return (
     <div className={styles.wrap}>
@@ -58,6 +76,30 @@ export default function SponsorsPage() {
 
       <main className={styles.main}>
         <section className={`section ${styles.join} ${localStyles.section}`} aria-label="Sponsors">
+          <div className={localStyles.logoWrap} aria-label="Sponsors logos">
+            <div className={localStyles.logoGroup} aria-label="Food Sponsor">
+              <h2 className={localStyles.logoHeading}>Food Sponsor</h2>
+              <div className={localStyles.logoGrid} aria-label="Food Sponsor logos">
+                {FOOD_SPONSORS.map((logo) => (
+                  <div key={logo.src} className={localStyles.logoCard}>
+                    <img className={localStyles.logoImg} src={logo.src} alt={logo.alt} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={localStyles.logoGroup} aria-label="Medical Partner">
+              <h2 className={localStyles.logoHeading}>Medical Partner</h2>
+              <div className={localStyles.logoGrid} aria-label="Medical Partner logos">
+                {MEDICAL_PARTNERS.map((logo) => (
+                  <div key={logo.src} className={localStyles.logoCard}>
+                    <img className={localStyles.logoImg} src={logo.src} alt={logo.alt} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className={localStyles.head}>
             <h1 className={localStyles.title}>
               <span className={localStyles.titleGlow}>Join Us on Our Journey</span>

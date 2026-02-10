@@ -39,3 +39,60 @@
   align-items:center;
   justify-content:center;
 }
+
+.logoWrap{
+  margin-top:0px;
+  margin-bottom:26px;
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+  display:grid;
+  gap:22px;
+}
+
+.logoGroup{
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 18px 60px rgba(0,0,0,.42);
+}
+
+.logoHeading{
+  margin:0 0 14px;
+  text-align:center;
+  font-family:"corpta-demo", "Cinzel", serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:clamp(16px, 2.2vw, 20px);
+  color:rgba(255,255,255,.92);
+}
+
+.logoGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:16px;
+}
+
+.logoCard{
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.22);
+  padding:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logoImg{
+  width:100%;
+  height:auto;
+  max-height:140px;
+  object-fit:contain;
+  filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));
+}
+
+@media (max-width: 720px){
+  .logoGroup{padding:14px;}
+  .logoImg{max-height:120px;}
+}

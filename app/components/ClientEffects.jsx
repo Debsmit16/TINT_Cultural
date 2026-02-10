@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 function clamp(v, min, max) {
   return Math.max(min, Math.min(max, v));
@@ -11,6 +12,59 @@ function lerp(a, b, t) {
 }
 
 export default function ClientEffects() {
+  const pathname = usePathname();
+  const hasMountedRef = useRef(false);
+  const typewriterCleanupRef = useRef(null);
+
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
+
+    if (typewriterCleanupRef.current) {
+      try {
+        typewriterCleanupRef.current();
+      } catch {
+        // ignore
+      }
+      typewriterCleanupRef.current = null;
+    }
+
+    const revealItems = Array.from(document.querySelectorAll('.reveal')).filter((el) => !el.classList.contains('is-visible'));
+    if (!revealItems.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      revealItems.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const revealIO = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            revealIO.unobserve(e.target);
+          }
+        }
+      },
+      { root: null, threshold: 0.12, rootMargin: '60px 0px -10px 0px' }
+    );
+
+    revealItems.forEach((el) => revealIO.observe(el));
+
+    requestAnimationFrame(() => {
+      for (const el of revealItems) {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.9) el.classList.add('is-visible');
+      }
+    });
+
+    return () => {
+      revealIO.disconnect();
+    };
+  }, [pathname]);
+
   useEffect(() => {
     // Enable JS-only behaviors (and JS-gated reveal animation)
     // Reference-counted so navigating away to pages that don't use ClientEffects
@@ -113,6 +167,12 @@ export default function ClientEffects() {
             timers.forEach((id) => window.clearTimeout(id));
             timers.clear();
           });
+
+          typewriterCleanupRef.current = () => {
+            cancelled = true;
+            timers.forEach((id) => window.clearTimeout(id));
+            timers.clear();
+          };
         }
       }
     }

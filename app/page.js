@@ -107,11 +107,6 @@ export default function Page() {
                   />
                 ))}
               </div>
-              <div className="marquee__group" aria-hidden="true">
-                {pickFiles(0, 6).map((fileName) => (
-                  <img key={`dup-a-${fileName}`} alt="" loading="lazy" src={toPhotoSrc(fileName)} />
-                ))}
-              </div>
             </div>
 
             <div className="marquee__row marquee__row--b" data-marquee>
@@ -123,11 +118,6 @@ export default function Page() {
                     loading="lazy"
                     src={toPhotoSrc(fileName)}
                   />
-                ))}
-              </div>
-              <div className="marquee__group" aria-hidden="true">
-                {pickFiles(6, 6).map((fileName) => (
-                  <img key={`dup-b-${fileName}`} alt="" loading="lazy" src={toPhotoSrc(fileName)} />
                 ))}
               </div>
             </div>
