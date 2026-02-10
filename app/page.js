@@ -53,6 +53,19 @@ export default function Page() {
         </div>
       </header>
 
+      <div className="topTicker" aria-label="Fixtures announcement">
+        <a className="topTicker__link" href="/exuberance/matches" aria-label="Fixtures are out now, open fixtures">
+          <span className="topTicker__track" aria-hidden="true">
+            <span className="topTicker__msg">Fixtures are out now — click here</span>
+            <span className="topTicker__sep">•</span>
+            <span className="topTicker__msg">Fixtures are out now — click here</span>
+            <span className="topTicker__sep">•</span>
+            <span className="topTicker__msg">Fixtures are out now — click here</span>
+          </span>
+          <span className="topTicker__sr">Fixtures are out now — click here</span>
+        </a>
+      </div>
+
       <main id="top" className="page">
         <section className="hero">
           <div className="hero__inner reveal">
