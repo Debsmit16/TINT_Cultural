@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function MatchesPage() {
   return (
-    <div className={styles.wrap}>
+    <div className={`${styles.wrap} ${localStyles.wrap}`}>
       {/* Lightweight static background */}
       <div className={styles.staticBg} aria-hidden="true" />
 
