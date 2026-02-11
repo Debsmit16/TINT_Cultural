@@ -45,7 +45,7 @@ function getFacultyFromPublicDir() {
 
   const normalize = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const featuredNames = ['dr ayan', 'dr soma chatterjee ghosh', 'dr swagata'].map(normalize);
-  const priorityRest = ['amlendu', 'taposi', 'rajkumar', 'joy chattaraj', 'srijan dutta', 'saubhik', 'pradipt', 'rajat'].map(
+  const priorityRest = ['amalendu singha mahapatra', 'taposi', 'rajkumar', 'joy chattaraj', 'srijan dutta', 'saubhik', 'pradipt', 'rajat'].map(
     normalize
   );
 

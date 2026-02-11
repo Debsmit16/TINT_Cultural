@@ -11,10 +11,12 @@ const FOOD_SPONSORS = [
   {
     src: '/logos/sponsors/Food express plaza_ Food sponcer.jpg',
     alt: 'Food Express Plaza',
+    href: 'https://share.google/QI1Hebd0UDNekcmD2',
   },
   {
     src: '/logos/sponsors/Royal Biriyani_Food Sponcer.jpg',
     alt: 'Royal Biriyani',
+    href: 'https://share.google/sM7Au5t0DfvAKFGpf',
   },
 ];
 
@@ -22,6 +24,7 @@ const MEDICAL_PARTNERS = [
   {
     src: '/logos/sponsors/Universal Educare_ Medical Partner.jpg',
     alt: 'Universal Educare',
+    href: 'https://telewiz.in/universal_edutech/',
   },
 ];
 
@@ -81,9 +84,18 @@ export default function SponsorsPage() {
               <h2 className={localStyles.logoHeading}>Food Sponsor</h2>
               <div className={localStyles.logoGrid} aria-label="Food Sponsor logos">
                 {FOOD_SPONSORS.map((logo) => (
-                  <div key={logo.src} className={localStyles.logoCard}>
-                    <img className={localStyles.logoImg} src={logo.src} alt={logo.alt} loading="lazy" />
-                  </div>
+                  <a
+                    key={logo.src}
+                    className={localStyles.logoLink}
+                    href={logo.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${logo.alt}`}
+                  >
+                    <div className={localStyles.logoCard}>
+                      <img className={localStyles.logoImg} src={logo.src} alt={logo.alt} loading="lazy" />
+                    </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -92,9 +104,18 @@ export default function SponsorsPage() {
               <h2 className={localStyles.logoHeading}>Medical Partner</h2>
               <div className={localStyles.logoGrid} aria-label="Medical Partner logos">
                 {MEDICAL_PARTNERS.map((logo) => (
-                  <div key={logo.src} className={localStyles.logoCard}>
-                    <img className={localStyles.logoImg} src={logo.src} alt={logo.alt} loading="lazy" />
-                  </div>
+                  <a
+                    key={logo.src}
+                    className={localStyles.logoLink}
+                    href={logo.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${logo.alt}`}
+                  >
+                    <div className={localStyles.logoCard}>
+                      <img className={localStyles.logoImg} src={logo.src} alt={logo.alt} loading="lazy" />
+                    </div>
+                  </a>
                 ))}
               </div>
             </div>

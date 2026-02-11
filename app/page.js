@@ -154,7 +154,14 @@ export default function Page() {
           </nav>
 
           <div className="footer__social" aria-label="Social links">
-            <a className="soc" href="#" aria-label="Instagram" title="Instagram">
+            <a
+              className="soc"
+              href="https://www.instagram.com/tintannualsports?igsh=M3YyMGN3c3IzaTdr"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+            >
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z"

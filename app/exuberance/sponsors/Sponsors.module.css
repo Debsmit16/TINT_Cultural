@@ -84,6 +84,15 @@
   justify-content:center;
 }
 
+.logoLink{
+  display:block;
+}
+
+.logoLink:focus-visible .logoCard{
+  outline:2px solid rgba(248,210,74,.75);
+  outline-offset:3px;
+}
+
 .logoImg{
   width:100%;
   height:auto;
