@@ -170,6 +170,181 @@ const CRICKET_BOYS_SF = [
   { label: 'SF2', left: 'ii', right: 'iii' },
 ];
 
+const CARROM_BOYS_TEAMS = new Map([
+  [1, ['Ajit Yadav', 'Md Asif']],
+  [2, ['Shubham Mondal', 'Sunny Kumar']],
+  [3, ['Sunny Kumar Gupta', 'Vishal Kumar']],
+  [4, ['Amit Mistry', 'Arpan Das']],
+  [5, ['Chirantan Panty', 'MD Suhail']],
+  [6, ['Shahid Raza', 'Shamir Akhtar']],
+  [7, ['Shayan Ali', 'Soumyadeep Singha Roy']],
+  [8, ['Souvik Dutta', 'Yogesh Karn']],
+  [9, ['Arkajyoti Rakshit', 'Arnav Goswami']],
+  [10, ['Harish Jamal', 'Koushik Gorai']],
+  [11, ['Prince Kumar', 'Pritam Chatterjee']],
+  [12, ['Ravi Raj', 'Saad Bin Riaz']],
+  [13, ['Sabyasachee Samanta', 'Sahid Mondal']],
+  [14, ['Abhishek Kumar', 'Sohail Khan']],
+  [15, ['Soumyajit Ghosal', 'Swastik Dhar']],
+  [16, ['Aman', 'Anurag']],
+  [17, ['Arijit Kundu', 'Ayan Dutta']],
+  [18, ['Pankaj Sharma', 'Satyam Kumar']],
+  [19, ['Syed Shayan Khalid', 'Umang Singh']],
+  [20, ['Akash Das', 'Aviraj Paul']],
+  [21, ['Pritam Dey', 'Sk Mamun']],
+  [22, ['Abhinandan Guchhait', 'Akshay Ghosh']],
+  [23, ['Mahfuz Hossain', 'Sahil Dutta']],
+  [24, ['Arjun Sagar Gupta', 'Ashutosh Saha']],
+  [25, ['Devanshu Kumar', 'Imtiaz Hossain']],
+  [26, ['Nikhil Kumar', 'Pranjal Verma']],
+  [27, ['Rohit Singh', 'Satyam Kumar Jha']],
+  [28, ['Shadab Saghir', 'Shahil Sharma']],
+  [29, ['Shivam Kumar', 'Syed Kashaf']],
+  [30, ['Md Rehan Ali', 'Amit Mahata']],
+  [31, ['Ansh Kumar Singh', 'Prakhar Kanti Das']],
+  [32, ['Sunil Maity', 'Debayan Dutta']],
+  [33, ['Abhigyan Chakraborty', 'Adhrikto Dey']],
+  [34, ['Ayush Dixit', 'Ayush Kumar Chowdhary']],
+  [35, ['Ayush Kumar Singh', 'Jitendra Sethia']],
+  [36, ['Subhadeep Bose', 'Ritam Mondal']],
+  [37, ['Ankit Sikder', 'Bibasawan Bajpayee']],
+  [38, ['Sohom Roy', 'Susty Suman']],
+  [39, ['Poornayu Mukherjee', 'Soumyadeep Roy']],
+  [40, ['Himagna Mallik', 'Pritam Basak']],
+  [41, ['Aditya Prakash', 'Kounik Biswas']],
+  [42, ['Sayantan Deb', 'Suraj Kumar Biswas']],
+  [43, ['Rohan Samanta', 'Rahul Kumar Ram']],
+  [44, ['Amit Kumar Das', 'Suman Chakraborty']],
+  [45, ['Kunal Narnolia', 'Shree Shyam Jaiswal']],
+  [46, ['Debraj Chatterjee', 'Sounak Sadhukhan']],
+  [47, ['Faculty Member', 'Faculty Member']],
+  [48, ['Faculty Member', 'Faculty Member']],
+]);
+
+const CARROM_GIRLS_TEAMS = new Map([
+  [1, ['Akrity Singh', 'Anshi Prasad']],
+  [2, ['Asmita Chatterjee', 'Sneha Mallick']],
+  [3, ['Soniya Kumari', 'Runa Kumari']],
+  [4, ['Sayani Pal', 'Sayanika Raha']],
+  [5, ['Anamika Sasmal', 'Tannishtha Jana']],
+  [6, ['Kashish Kumari', 'Meghna Sinha']],
+  [7, ['Chahak Agrawal', 'Bistrina Sarkar']],
+  [8, ['Pallabi Paloi', 'Dhriti Das']],
+  [9, ['Faculty', 'Faculty']],
+  [10, ['Faculty', 'Faculty']],
+]);
+
+function carromTeamLabel(teamNo, teamMap) {
+  void teamMap;
+  return `Team ${teamNo}`;
+}
+
+const CARROM_GIRLS_R1_PAIRS = [
+  [6, 2],
+  [9, 1],
+  [4, 8],
+  [10, 3],
+  [7, 5],
+];
+
+const CARROM_BOYS_PAIRS = [
+  [17, 4],
+  [29, 1],
+  [42, 8],
+  [36, 12],
+  [5, 27],
+  [19, 44],
+  [2, 33],
+  [14, 6],
+  [41, 25],
+  [9, 30],
+  [47, 11],
+  [38, 22],
+  [7, 45],
+  [16, 3],
+  [28, 40],
+  [10, 35],
+  [21, 48],
+  [13, 31],
+  [18, 24],
+  [32, 15],
+  [46, 26],
+  [20, 39],
+  [34, 23],
+  [43, 37],
+];
+
+const CARROM_GIRLS_R1 = [
+  { label: 'M1', left: carromTeamLabel(6, CARROM_GIRLS_TEAMS), right: carromTeamLabel(2, CARROM_GIRLS_TEAMS) },
+  { label: 'M2', left: carromTeamLabel(9, CARROM_GIRLS_TEAMS), right: carromTeamLabel(1, CARROM_GIRLS_TEAMS) },
+  { label: 'M3', left: carromTeamLabel(4, CARROM_GIRLS_TEAMS), right: carromTeamLabel(8, CARROM_GIRLS_TEAMS) },
+  { label: 'M4', left: carromTeamLabel(10, CARROM_GIRLS_TEAMS), right: carromTeamLabel(3, CARROM_GIRLS_TEAMS) },
+  { label: 'M5', left: carromTeamLabel(7, CARROM_GIRLS_TEAMS), right: carromTeamLabel(5, CARROM_GIRLS_TEAMS) },
+];
+
+const CARROM_BOYS_FIXTURES = [
+  { label: 'M1', left: carromTeamLabel(17, CARROM_BOYS_TEAMS), right: carromTeamLabel(4, CARROM_BOYS_TEAMS) },
+  { label: 'M2', left: carromTeamLabel(29, CARROM_BOYS_TEAMS), right: carromTeamLabel(1, CARROM_BOYS_TEAMS) },
+  { label: 'M3', left: carromTeamLabel(42, CARROM_BOYS_TEAMS), right: carromTeamLabel(8, CARROM_BOYS_TEAMS) },
+  { label: 'M4', left: carromTeamLabel(36, CARROM_BOYS_TEAMS), right: carromTeamLabel(12, CARROM_BOYS_TEAMS) },
+  { label: 'M5', left: carromTeamLabel(5, CARROM_BOYS_TEAMS), right: carromTeamLabel(27, CARROM_BOYS_TEAMS) },
+  { label: 'M6', left: carromTeamLabel(19, CARROM_BOYS_TEAMS), right: carromTeamLabel(44, CARROM_BOYS_TEAMS) },
+  { label: 'M7', left: carromTeamLabel(2, CARROM_BOYS_TEAMS), right: carromTeamLabel(33, CARROM_BOYS_TEAMS) },
+  { label: 'M8', left: carromTeamLabel(14, CARROM_BOYS_TEAMS), right: carromTeamLabel(6, CARROM_BOYS_TEAMS) },
+  { label: 'M9', left: carromTeamLabel(41, CARROM_BOYS_TEAMS), right: carromTeamLabel(25, CARROM_BOYS_TEAMS) },
+  { label: 'M10', left: carromTeamLabel(9, CARROM_BOYS_TEAMS), right: carromTeamLabel(30, CARROM_BOYS_TEAMS) },
+  { label: 'M11', left: carromTeamLabel(47, CARROM_BOYS_TEAMS), right: carromTeamLabel(11, CARROM_BOYS_TEAMS) },
+  { label: 'M12', left: carromTeamLabel(38, CARROM_BOYS_TEAMS), right: carromTeamLabel(22, CARROM_BOYS_TEAMS) },
+  { label: 'M13', left: carromTeamLabel(7, CARROM_BOYS_TEAMS), right: carromTeamLabel(45, CARROM_BOYS_TEAMS) },
+  { label: 'M14', left: carromTeamLabel(16, CARROM_BOYS_TEAMS), right: carromTeamLabel(3, CARROM_BOYS_TEAMS) },
+  { label: 'M15', left: carromTeamLabel(28, CARROM_BOYS_TEAMS), right: carromTeamLabel(40, CARROM_BOYS_TEAMS) },
+  { label: 'M16', left: carromTeamLabel(10, CARROM_BOYS_TEAMS), right: carromTeamLabel(35, CARROM_BOYS_TEAMS) },
+  { label: 'M17', left: carromTeamLabel(21, CARROM_BOYS_TEAMS), right: carromTeamLabel(48, CARROM_BOYS_TEAMS) },
+  { label: 'M18', left: carromTeamLabel(13, CARROM_BOYS_TEAMS), right: carromTeamLabel(31, CARROM_BOYS_TEAMS) },
+  { label: 'M19', left: carromTeamLabel(18, CARROM_BOYS_TEAMS), right: carromTeamLabel(24, CARROM_BOYS_TEAMS) },
+  { label: 'M20', left: carromTeamLabel(32, CARROM_BOYS_TEAMS), right: carromTeamLabel(15, CARROM_BOYS_TEAMS) },
+  { label: 'M21', left: carromTeamLabel(46, CARROM_BOYS_TEAMS), right: carromTeamLabel(26, CARROM_BOYS_TEAMS) },
+  { label: 'M22', left: carromTeamLabel(20, CARROM_BOYS_TEAMS), right: carromTeamLabel(39, CARROM_BOYS_TEAMS) },
+  { label: 'M23', left: carromTeamLabel(34, CARROM_BOYS_TEAMS), right: carromTeamLabel(23, CARROM_BOYS_TEAMS) },
+  { label: 'M24', left: carromTeamLabel(43, CARROM_BOYS_TEAMS), right: carromTeamLabel(37, CARROM_BOYS_TEAMS) },
+];
+
+const FOOTBALL_R1 = [
+  { label: 'M1', left: 'CSE 4th', right: 'ECE 4th' },
+  { label: 'M2', left: 'CSE 1st', right: 'IT 1st' },
+  { label: 'M3', left: 'ECE 2nd', right: 'AIML 4th' },
+  { label: 'M4', left: 'MCA 1st', right: 'AIML 2nd' },
+  { label: 'M5', left: 'CSE 3rd', right: 'BCA 2nd' },
+  { label: 'M6', left: 'CSE 2nd', right: 'ECE 1st' },
+  { label: 'M7', left: 'AIML 3rd', right: 'BBA 3rd' },
+  { label: 'M8', left: 'AEIE 4th', right: 'ECE 3rd' },
+  { label: 'M9', left: 'IT 3rd', right: 'AIDS 1st' },
+  { label: 'M10', left: 'CSBS 3rd', right: 'AIML 1st' },
+];
+
+const FOOTBALL_R2 = [
+  { label: 'A', left: '1', right: '3' },
+  { label: 'B', left: '2', right: '4' },
+  { label: 'C', left: '5', right: '7' },
+  { label: 'D', left: '6', right: '8' },
+  { label: 'E', left: '9', right: '10' },
+  { label: 'F', left: 'F1 (CSE)', right: 'BYE' },
+];
+
+const FOOTBALL_R3 = [
+  { label: 'i', left: 'A', right: 'C' },
+  { label: 'ii', left: 'B', right: 'D' },
+  { label: 'iii', left: 'F', right: 'Qualifier' },
+  { label: 'iv', left: 'F2 (AIML)', right: 'BYE' },
+];
+
+const FOOTBALL_SF = [
+  { label: 'SF1', left: 'i', right: 'iv' },
+  { label: 'SF2', left: 'ii', right: 'iii' },
+];
+
+const FOOTBALL_FINAL = [{ label: 'Final', left: 'Winner SF1', right: 'Winner SF2' }];
+
 const CHESS_PLAYERS = new Map([
   [1, 'Soumyadipta Dey'],
   [2, 'Amit Mistry'],
@@ -366,6 +541,28 @@ function findUniqueOpponents(fixtures, number) {
   return Array.from(new Set(findOpponents(fixtures, number)));
 }
 
+function getCarromTeamByPlayerName(input) {
+  const allBoys = Array.from(CARROM_BOYS_TEAMS.entries());
+  const allGirls = Array.from(CARROM_GIRLS_TEAMS.entries());
+
+  const allNames = [
+    ...allBoys.flatMap(([, players]) => players),
+    ...allGirls.flatMap(([, players]) => players),
+  ].filter((n) => n && normalizeName(n) !== 'faculty' && normalizeName(n) !== 'faculty member');
+
+  const best = findBestNameMatch(input, allNames);
+  if (!best) return null;
+
+  const bestNorm = normalizeName(best);
+  const boysEntry = allBoys.find(([, players]) => players.some((p) => normalizeName(p) === bestNorm));
+  if (boysEntry) return { group: 'boys', teamNumber: boysEntry[0], matchedName: best };
+
+  const girlsEntry = allGirls.find(([, players]) => players.some((p) => normalizeName(p) === bestNorm));
+  if (girlsEntry) return { group: 'girls', teamNumber: girlsEntry[0], matchedName: best };
+
+  return null;
+}
+
 function NamedFixtureList({ title, fixtures }) {
   return (
     <div className={localStyles.namedWrap} aria-label={title}>
@@ -451,14 +648,14 @@ function FixtureList({ fixtures }) {
   );
 }
 
-function Results({ title, numberLabel, numberValue, matchedName, opponentItems }) {
+function Results({ title, numberLabel, numberValue, matchedName, opponentItems, hideName = false }) {
   return (
     <div className={localStyles.resultsWrap} aria-label={`${title} results`}>
       <div className={localStyles.resultsHeader}>
         <div className={localStyles.resultsTitle}>{title}</div>
         <div className={localStyles.resultsMeta}>
           <span className={localStyles.resultsChip}>{numberLabel}: {numberValue}</span>
-          <span className={localStyles.resultsChipAlt}>Name: {matchedName}</span>
+          {!hideName ? <span className={localStyles.resultsChipAlt}>Name: {matchedName}</span> : null}
         </div>
       </div>
 
@@ -644,6 +841,49 @@ export default function MatchesClient() {
       return;
     }
 
+    if (activeSport === 'carrom') {
+      const found = getCarromTeamByPlayerName(nameInput);
+      if (!found) {
+        setError('Name not found in Carrom list. Please check spelling.');
+        return;
+      }
+
+      const fixtures = found.group === 'girls' ? CARROM_GIRLS_R1_PAIRS : CARROM_BOYS_PAIRS;
+      const teamMap = found.group === 'girls' ? CARROM_GIRLS_TEAMS : CARROM_BOYS_TEAMS;
+      const teamPlayers = teamMap.get(found.teamNumber) || [];
+
+      const teammate = teamPlayers.find(
+        (p) =>
+          normalizeName(p) !== normalizeName(found.matchedName) &&
+          normalizeName(p) !== 'faculty' &&
+          normalizeName(p) !== 'faculty member'
+      );
+
+      const opponents = findUniqueOpponents(fixtures, found.teamNumber);
+      const opponentItems = [
+        {
+          key: `carrom-teammate-${found.group}-${found.teamNumber}`,
+          label: 'Teammate',
+          number: null,
+          name: teammate || 'Teammate not found',
+        },
+        ...opponents.map((n) => {
+          const oppPlayers = teamMap.get(n);
+          const name = oppPlayers ? `Team ${n}: ${oppPlayers.join(' • ')}` : `Team ${n}`;
+          return { key: `carrom-${found.group}-${n}`, label: 'Opponent', number: n, name };
+        }),
+      ];
+
+      setResult({
+        sportTitle: 'Carrom',
+        numberLabel: 'Team',
+        numberValue: found.teamNumber,
+        matchedName: found.matchedName,
+        opponentItems,
+      });
+      return;
+    }
+
     if (activeSport === 'chess') {
       const found = getChessPlayerIdsByName(nameInput);
       if (!found) {
@@ -702,12 +942,40 @@ export default function MatchesClient() {
       <SportSection
         id="football"
         title="Football"
-        subtitle="Fixture will be updated soon."
+        subtitle="Fixtures and bracket are shown below."
         fixtures={[]}
         mode={mode}
         setMode={setMode}
         showFind={false}
-        fixtureContent={<div className={localStyles.empty}>Fixtures will be updated soon.</div>}
+        fixtureContent={
+          <>
+            <NamedFixtureList title="Football — Round 1" fixtures={FOOTBALL_R1} />
+            <NamedFixtureList title="Football — Round 2" fixtures={FOOTBALL_R2} />
+            <BracketFlow
+              roundTitle="Football — Round 3"
+              roundMatches={FOOTBALL_R3}
+              nextTitle="Football — Semi Final"
+              nextMatches={FOOTBALL_SF}
+            />
+            <NamedFixtureList title="Football — Final" fixtures={FOOTBALL_FINAL} />
+          </>
+        }
+      />
+
+      <SportSection
+        id="carrom"
+        title="Carrom"
+        subtitle="Matches are shown by team number only."
+        fixtures={[]}
+        mode={mode}
+        setMode={setMode}
+        onFindClick={() => openFind('carrom')}
+        fixtureContent={
+          <>
+            <NamedFixtureList title="Carrom (Girls) — Round 1" fixtures={CARROM_GIRLS_R1} />
+            <NamedFixtureList title="Carrom (Boys) — Fixtures" fixtures={CARROM_BOYS_FIXTURES} />
+          </>
+        }
       />
 
       <SportSection
@@ -749,6 +1017,8 @@ export default function MatchesClient() {
               ? 'Find your match — Table Tennis'
               : activeSport === 'chess'
                 ? 'Find your match — Chess'
+                : activeSport === 'carrom'
+                  ? 'Find your match — Carrom'
                 : 'Find your match'
         }
         onClose={closeFind}
@@ -799,6 +1069,7 @@ export default function MatchesClient() {
               numberValue={result.numberValue}
               matchedName={result.matchedName}
               opponentItems={result.opponentItems}
+              hideName={result.hideName}
             />
           )
         ) : null}

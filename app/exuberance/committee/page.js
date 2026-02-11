@@ -91,13 +91,49 @@ function getCommitteeFromPublicDir() {
   }
 
   const allowed = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.heic']);
-  return files
+  const items = files
     .filter((f) => allowed.has(path.extname(f).toLowerCase()))
     .map((fileName) => ({
       fileName,
       name: displayNameFromFileName(fileName),
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  const normalize = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const priorityOrder = [
+    'karan raj singh',
+    'sobhan',
+    'santosh',
+    'suchismita',
+    'anushka',
+    'debsmit',
+    'ujan',
+    'anuksha',
+    'aditya saha',
+    'pritam basak',
+    'suman karmakar',
+    'nairik',
+    'sharif',
+    'abhinandan',
+    'debjyoti sarkar',
+    'trishanu',
+    'syed areeb',
+  ].map(normalize);
+
+  return items
+    .slice()
+    .sort((a, b) => {
+      const an = normalize(a.name);
+      const bn = normalize(b.name);
+
+      const aP = priorityOrder.findIndex((p) => an.includes(p));
+      const bP = priorityOrder.findIndex((p) => bn.includes(p));
+
+      const aRank = aP === -1 ? Number.POSITIVE_INFINITY : aP;
+      const bRank = bP === -1 ? Number.POSITIVE_INFINITY : bP;
+      if (aRank !== bRank) return aRank - bRank;
+      return a.name.localeCompare(b.name);
+    });
 }
 
 function LinkedInIcon() {

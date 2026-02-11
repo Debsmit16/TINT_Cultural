@@ -1,6 +1,7 @@
 export const EXUBERANCE_GALLERY_INITIAL_COUNT = 6;
 
 export const EXUBERANCE_GALLERY_FILES = [
+  '1st picture.webp',
   '1_20260126_163154_0000 (1).webp',
   '1_20260126_163154_0000 (2).webp',
   '2_20260126_163154_0001 (2).webp',
