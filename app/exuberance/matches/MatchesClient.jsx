@@ -129,14 +129,14 @@ const CRICKET_GIRLS_FIXTURES = [
 ];
 
 const CRICKET_BOYS_R1 = [
-  { label: 'M1', left: 'EE 3rd', right: 'DS 3rd' },
+  { label: 'M1', left: 'ECE 1st', right: 'IOT 3rd' },
   { label: 'M2', left: 'BBA 2nd', right: 'IOT 1st' },
   { label: 'M3', left: 'CYS 2nd', right: 'IT 3rd' },
   { label: 'M4', left: 'CSE 3rd', right: 'ECE 3rd' },
   { label: 'M5', left: 'ECE 2nd', right: 'CSE 2nd' },
   { label: 'M6', left: 'DS 2nd', right: 'BCA (2nd + 3rd)' },
-  { label: 'M7', left: 'ECE 1st', right: 'IOT 3rd' },
-  { label: 'M8', left: 'IT 2nd', right: 'CSE FAC 1' },
+  { label: 'M7', left: 'IT 2nd', right: 'CSE FAC 1' },
+  { label: 'M8', left: 'EE 3rd', right: 'DS 3rd' },
   { label: 'M9', left: 'FAC 2', right: 'MCA 1st' },
   { label: 'M10', left: 'DS 1st', right: 'CSBS 3rd' },
   { label: 'M11', left: 'FAC 1', right: 'AIML 1st' },
