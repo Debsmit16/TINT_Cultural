@@ -142,10 +142,10 @@ const CRICKET_GIRLS_FIXTURES = [
 ];
 
 const CRICKET_BOYS_R1 = [
-  { label: 'M1', left: 'CSE 3rd', right: 'ECE 3rd' },
+  { label: 'M1', left: 'EE 3rd', right: 'DS 3rd' },
   { label: 'M2', left: 'BBA 2nd', right: 'IOT 1st' },
   { label: 'M3', left: 'CYS 2nd', right: 'IT 3rd' },
-  { label: 'M4', left: 'EE 3rd', right: 'DS 3rd' },
+  { label: 'M4', left: 'CSE 3rd', right: 'ECE 3rd' },
   { label: 'M5', left: 'ECE 2nd', right: 'CSE 2nd' },
   { label: 'M6', left: 'DS 2nd', right: 'BCA (2nd + 3rd)' },
   { label: 'M7', left: 'ECE 1st', right: 'IOT 3rd' },
@@ -323,17 +323,16 @@ const CARROM_BOYS_FIXTURES = [
 ];
 
 const FOOTBALL_R1 = [
-  { label: 'M1', left: 'EE 3rd', right: 'CYS 1st' },
-  { label: 'M2', left: 'CSE 2nd', right: 'ECE 1st' },
+  { label: 'M1', left: 'CSE 4th', right: 'ECE 4th' },
+  { label: 'M2', left: 'CSE 1st', right: 'IT 1st' },
   { label: 'M3', left: 'ECE 2nd', right: 'AIML 4th' },
   { label: 'M4', left: 'MCA 1st', right: 'AIML 2nd' },
   { label: 'M5', left: 'CSE 3rd', right: 'BCA 2nd' },
-  { label: 'M6', left: 'CSBS 3rd', right: 'AIML 1st' },
+  { label: 'M6', left: 'CSE 2nd', right: 'ECE 1st' },
   { label: 'M7', left: 'AIML 3rd', right: 'BBA 3rd' },
   { label: 'M8', left: 'AEIE 4th', right: 'ECE 3rd' },
   { label: 'M9', left: 'IT 3rd', right: 'AIDS 1st' },
-  { label: 'M10', left: 'CSE 4th', right: 'ECE 4th' },
-  { label: 'M11', left: 'CSBS 3rd', right: 'AIML 1st' },
+  { label: 'M10', left: 'CSBS 3rd', right: 'AIML 1st' },
 ];
 
 const FOOTBALL_R2 = [
