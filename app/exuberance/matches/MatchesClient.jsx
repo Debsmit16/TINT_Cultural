@@ -310,12 +310,12 @@ const CARROM_BOYS_FIXTURES = [
 ];
 
 const FOOTBALL_R1 = [
-  { label: 'M1', left: 'CSE 4th', right: 'ECE 4th' },
-  { label: 'M2', left: 'CSE 1st', right: 'IT 1st' },
+  { label: 'M1', left: 'EE 3rd', right: 'CYS 1st' },
+  { label: 'M2', left: 'CSE 2nd', right: 'ECE 1st' },
   { label: 'M3', left: 'ECE 2nd', right: 'AIML 4th' },
   { label: 'M4', left: 'MCA 1st', right: 'AIML 2nd' },
   { label: 'M5', left: 'CSE 3rd', right: 'BCA 2nd' },
-  { label: 'M6', left: 'CSE 2nd', right: 'ECE 1st' },
+  { label: 'M6', left: 'CSBS 3rd', right: 'AIML 1st' },
   { label: 'M7', left: 'AIML 3rd', right: 'BBA 3rd' },
   { label: 'M8', left: 'AEIE 4th', right: 'ECE 3rd' },
   { label: 'M9', left: 'IT 3rd', right: 'AIDS 1st' },
