@@ -152,7 +152,7 @@ export const EVENT_DETAILS = {
     ],
     eventHeads: [
       { name: 'Santosh Kumar Singh', extra: 'Contact: 7980464129' },
-      { name: 'Souvik Banerjee', extra: 'Contact: 6295465320' },
+      { name: 'Souvik Karmakar', extra: 'Contact: 6295465320' },
     ],
   },
   'hit-the-wicket': {

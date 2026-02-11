@@ -12,20 +12,28 @@ export default function ScheduleTabs() {
         label: '12 Feb',
         title: 'Day 1 • 12 Feb 2026',
         items: [
-          { time: '09:00 AM', event: 'Opening Ceremony', note: 'Kick-off, march past, and welcome address.' },
-          { time: '10:30 AM', event: 'Athletics Heats', note: '100m / 400m trials and qualifiers.' },
-          { time: '01:30 PM', event: 'Indoor Arena', note: 'Chess, Carrom, Table Tennis — early rounds.' },
-          { time: '04:00 PM', event: 'Outdoor Matches', note: 'Football & Cricket fixtures begin.' },
+          { time: '07:30–08:30 AM', event: 'Athletics Registration' },
+          { time: '07:30 AM', event: 'Cricket Registration' },
+          { time: '08:00 AM', event: 'Athletics (100m, 400m, Relay)' },
+          { time: '08:00 AM', event: 'Cricket Matches' },
+          { time: '08:30–09:30 AM', event: 'Badminton Registration' },
+          { time: '08:30 AM', event: 'Indoor Games Reporting' },
+          { time: '09:00 AM', event: 'Indoor Games' },
+          { time: '09:30 AM', event: 'Football Reporting' },
+          { time: '10:00 AM', event: 'Badminton Matches' },
+          { time: '10:00 AM', event: 'Football Matches' },
+          { time: '12:00 Noon', event: 'Inauguration Ceremony' },
         ],
       },
       '6': {
         label: '13 Feb',
         title: 'Day 2 • 13 Feb 2026',
         items: [
-          { time: '09:30 AM', event: 'Relay Trials', note: 'Team registrations & heats.' },
-          { time: '11:00 AM', event: 'Field Events', note: 'Shotput and fun athletics.' },
-          { time: '02:00 PM', event: 'Indoor Semi-Finals', note: 'Fast-paced eliminations across indoor games.' },
-          { time: '04:30 PM', event: 'Outdoor Knockouts', note: 'Quarter/Semi rounds for major sports.' },
+          { time: '', event: 'Cricket Semi-Finals' },
+          { time: '', event: 'Football Semi-Finals' },
+          { time: '', event: 'Cricket Finals' },
+          { time: '', event: 'Football Finals' },
+          { time: '', event: 'Cricket (Girls)' },
         ],
       },
     }),
@@ -62,7 +70,7 @@ export default function ScheduleTabs() {
           <ul className={styles.list}>
             {active.items.map((it) => (
               <li key={`${activeDay}-${it.time}-${it.event}`} className={styles.item}>
-                <div className={styles.time}>{it.time}</div>
+                {it.time ? <div className={styles.time}>{it.time}</div> : null}
                 <div className={styles.event}>
                   {it.event}
                   {it.note ? <div className={styles.note}>{it.note}</div> : null}
