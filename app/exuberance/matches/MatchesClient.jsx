@@ -75,19 +75,21 @@ const BADMINTON_GIRLS_TEAMS = [
 ];
 
 const TABLE_TENNIS_FIXTURES = [
-  [1, 2],
-  [3, 4],
-  [5, 6],
-  [7, 8],
-  [9, 10],
-  [11, 12],
-  [13, 14],
-  [15, 16],
-  [17, 18],
-  [19, 20],
-  [21, 22],
-  [23, 24],
-  [25, 26],
+  [1, 16],
+  [2, 19],
+  [3, 14],
+  [4, 17],
+  [5, 21],
+  [6, 18],
+  [7, 22],
+  [8, 26],
+  [9, 27],
+  [10, 25],
+  [11, 24],
+  [12, 20],
+  [13, 28],
+  [14, 3],
+  [15, 23],
 ];
 
 const TABLE_TENNIS_PLAYERS = new Map([
@@ -121,31 +123,16 @@ const TABLE_TENNIS_PLAYERS = new Map([
   [28, 'Faculty'],
 ]);
 
-const TABLE_TENNIS_GIRLS_FIXTURES = [
-  [1, 2],
-  [3, 4],
-  [6, 7],
-];
-
-const TABLE_TENNIS_GIRLS_PLAYERS = new Map([
-  [1, 'Sneha Pal'],
-  [2, 'Samsunnehar Khatun'],
-  [3, 'Asmita Chatterjee'],
-  [4, 'Dhriti Das'],
-  [6, 'Susweta Das'],
-  [7, 'Bidisha Majumder'],
-]);
-
 const CRICKET_GIRLS_FIXTURES = [
   { label: 'M1', left: 'Team B', right: 'Team D' },
   { label: 'M2', left: 'Team A', right: 'Team C' },
 ];
 
 const CRICKET_BOYS_R1 = [
-  { label: 'M1', left: 'EE 3rd', right: 'DS 3rd' },
+  { label: 'M1', left: 'CSE 3rd', right: 'ECE 3rd' },
   { label: 'M2', left: 'BBA 2nd', right: 'IOT 1st' },
   { label: 'M3', left: 'CYS 2nd', right: 'IT 3rd' },
-  { label: 'M4', left: 'CSE 3rd', right: 'ECE 3rd' },
+  { label: 'M4', left: 'EE 3rd', right: 'DS 3rd' },
   { label: 'M5', left: 'ECE 2nd', right: 'CSE 2nd' },
   { label: 'M6', left: 'DS 2nd', right: 'BCA (2nd + 3rd)' },
   { label: 'M7', left: 'ECE 1st', right: 'IOT 3rd' },
@@ -323,16 +310,17 @@ const CARROM_BOYS_FIXTURES = [
 ];
 
 const FOOTBALL_R1 = [
-  { label: 'M1', left: 'CSE 4th', right: 'ECE 4th' },
-  { label: 'M2', left: 'CSE 1st', right: 'IT 1st' },
+  { label: 'M1', left: 'EE 3rd', right: 'CYS 1st' },
+  { label: 'M2', left: 'CSE 2nd', right: 'ECE 1st' },
   { label: 'M3', left: 'ECE 2nd', right: 'AIML 4th' },
   { label: 'M4', left: 'MCA 1st', right: 'AIML 2nd' },
   { label: 'M5', left: 'CSE 3rd', right: 'BCA 2nd' },
-  { label: 'M6', left: 'CSE 2nd', right: 'ECE 1st' },
+  { label: 'M6', left: 'CSBS 3rd', right: 'AIML 1st' },
   { label: 'M7', left: 'AIML 3rd', right: 'BBA 3rd' },
   { label: 'M8', left: 'AEIE 4th', right: 'ECE 3rd' },
   { label: 'M9', left: 'IT 3rd', right: 'AIDS 1st' },
-  { label: 'M10', left: 'CSBS 3rd', right: 'AIML 1st' },
+  { label: 'M10', left: 'CSE 4th', right: 'ECE 4th' },
+  { label: 'M11', left: 'CSBS 3rd', right: 'AIML 1st' },
 ];
 
 const FOOTBALL_R2 = [
@@ -524,17 +512,6 @@ function getTableTennisPlayerNumberByName(input) {
   if (!best) return null;
 
   const entry = Array.from(TABLE_TENNIS_PLAYERS.entries()).find(([, n]) => normalizeName(n) === normalizeName(best));
-  if (!entry) return null;
-
-  return { playerNumber: entry[0], matchedName: best };
-}
-
-function getTableTennisGirlsPlayerNumberByName(input) {
-  const allNames = Array.from(TABLE_TENNIS_GIRLS_PLAYERS.values()).filter((n) => normalizeName(n) !== 'faculty');
-  const best = findBestNameMatch(input, allNames);
-  if (!best) return null;
-
-  const entry = Array.from(TABLE_TENNIS_GIRLS_PLAYERS.entries()).find(([, n]) => normalizeName(n) === normalizeName(best));
   if (!entry) return null;
 
   return { playerNumber: entry[0], matchedName: best };
@@ -865,29 +842,6 @@ export default function MatchesClient() {
       return;
     }
 
-    if (activeSport === 'tt-girls') {
-      const found = getTableTennisGirlsPlayerNumberByName(nameInput);
-      if (!found) {
-        setError('Name not found in Table Tennis (Girls) list. Please check spelling.');
-        return;
-      }
-
-      const opponents = findOpponents(TABLE_TENNIS_GIRLS_FIXTURES, found.playerNumber);
-      const opponentItems = opponents.map((n) => {
-        const name = TABLE_TENNIS_GIRLS_PLAYERS.get(n) || `Player ${n}`;
-        return { key: `ttg-${n}`, number: n, name };
-      });
-
-      setResult({
-        sportTitle: 'Table Tennis (Girls)',
-        numberLabel: 'Player',
-        numberValue: found.playerNumber,
-        matchedName: found.matchedName,
-        opponentItems,
-      });
-      return;
-    }
-
     if (activeSport === 'carrom') {
       const found = getCarromTeamByPlayerName(nameInput);
       if (!found) {
@@ -1055,16 +1009,6 @@ export default function MatchesClient() {
         onFindClick={() => openFind('tt')}
       />
 
-      <SportSection
-        id="tt-girls"
-        title="Table Tennis (Girls)"
-        subtitle="Matches are shown by player number only."
-        fixtures={TABLE_TENNIS_GIRLS_FIXTURES}
-        mode={mode}
-        setMode={setMode}
-        onFindClick={() => openFind('tt-girls')}
-      />
-
       <Modal
         open={modalOpen}
         title={
@@ -1072,8 +1016,6 @@ export default function MatchesClient() {
             ? 'Find your match — Badminton Girls'
             : activeSport === 'tt'
               ? 'Find your match — Table Tennis'
-              : activeSport === 'tt-girls'
-                ? 'Find your match — Table Tennis (Girls)'
               : activeSport === 'chess'
                 ? 'Find your match — Chess'
                 : activeSport === 'carrom'
