@@ -446,7 +446,7 @@ export default function OutdoorRegistration() {
 
         <footer className="footer">
           <div className="footer__bottom">
-            <div>© {new Date().getFullYear()} TINT — Exuberance 2026</div>
+            <div>© {new Date().getFullYear()} BD Technyx — Exuberance 2026</div>
           </div>
         </footer>
       </main>

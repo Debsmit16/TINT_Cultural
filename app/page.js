@@ -193,7 +193,7 @@ export default function Page() {
         </div>
 
         <div className="footer__bottom">
-          <div>© {new Date().getFullYear()} TINT. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} BD Technyx. All rights reserved.</div>
         </div>
       </footer>
 

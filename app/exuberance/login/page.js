@@ -83,7 +83,7 @@ export default function LoginPage() {
           </div>
 
           <div className="footer__bottom">
-            <div>© {new Date().getFullYear()} TINT</div>
+            <div>© {new Date().getFullYear()} BD Technyx</div>
             <div className="footer__fine">Built for the night.</div>
           </div>
         </footer>

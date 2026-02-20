@@ -380,7 +380,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <div className="footer__bottom">
-            <div>© {new Date().getFullYear()} TINT</div>
+            <div>© {new Date().getFullYear()} BD Technyx</div>
           </div>
         </footer>
       </main>
